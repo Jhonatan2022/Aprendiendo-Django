@@ -10,9 +10,12 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
+# Import the pathlib and os modules
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+# Nos permite acceder a los archivos de la aplicación desde cualquier parte del sistema
+# Nos indica la ruta de los directorios
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -20,16 +23,21 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+# Este apartado determinara la clave secreta que se usara para encriptar la información
+# Sirve para mejorar la encriptación de los usuarios y contraseñas
 SECRET_KEY = 'django-insecure-9a8e7lb+hvz1rbdy%xc5m8a@wj_%x50)@mdp1cbp71&e5u*-eb'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# Este apartado determinara si la aplicación se ejecutara en modo desarrollo o producción
+DEBUG = True  # Modo desarrollo (True) / Modo producción (False)
 
+
+# Este apartado determinara que direcciónes tiene permitido acceder a la aplicación
 ALLOWED_HOSTS = []
 
 
 # Application definition
-
+# Django nos permite dividir el proyecto en diferentes aplicaciones
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -39,6 +47,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
+# Este apartado determinara las aplicaciones que se usaran en el proyecto
+# Nos permite procesar determinado tipo de datos en la aplicación
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -51,6 +61,8 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'mysite.urls'
 
+# Este apartado determinara el motor de plantillas que se usara en el proyecto
+# Aunque nos sirve más para el modo de producción de la aplicación
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -72,7 +84,8 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
+# Este apartado determinara el motor de base de datos que se usara en el proyecto
+# Nos indica a que base de datos nos vamos a conectar o estamos conectados
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -103,18 +116,22 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
+# Este apartado determinara el lenguaje por defecto
 LANGUAGE_CODE = 'en-us'
 
+# Este apartado determinara la zona horaria por defecto
 TIME_ZONE = 'UTC'
 
+# Este apartado determinara si se usara o no la internacionalización 
 USE_I18N = True
 
+# Este apartado determinara si se usara o no la localización
 USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
-
+# Este apartado determinara la ruta de los archivos estáticos
 STATIC_URL = 'static/'
 
 # Default primary key field type

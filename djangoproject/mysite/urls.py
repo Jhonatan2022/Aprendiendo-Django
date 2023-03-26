@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+
+# En este apartado pondremos las rutas del proyecto que los usuarios podran acceder
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
