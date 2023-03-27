@@ -16,8 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+# Importamos la vista que hemos creado en views.py
+from myapp.views import hello
 
 # En este apartado pondremos las rutas del proyecto que los usuarios podran acceder
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # Si dejamos la ruta vacia, nos enviara a la vista principal de nuestra aplicación
+    path('', hello),
 ]
