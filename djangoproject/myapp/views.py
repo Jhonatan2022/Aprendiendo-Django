@@ -8,4 +8,8 @@ from django.http import HttpResponse
 
 # Crearemos una vista que nos permita mostrar un mensaje en la página principal de nuestra aplicación
 def hello(request):
-    return HttpResponse("Hello World")
+    return HttpResponse("<h1> Hello World </h1>")
+
+# Creamos una segunda vista que nos permita mostrar un mensaje en la página principal de nuestra aplicación
+def hello2(request):
+    return HttpResponse("<h1> Second hello world </h1>")
