@@ -25,5 +25,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     # Importamos las rutas de nuestra aplicación
+    # Podemos agregarle un prefijo a las rutas de nuestra aplicación con el argumento 'home/'
     path('', include('myapp.urls')), # Dejamos la ruta vacia para que nos muestre la vista principal de nuestra aplicación para no tener que poner rutas precedentes
 ]

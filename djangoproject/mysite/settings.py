@@ -38,6 +38,7 @@ ALLOWED_HOSTS = []
 
 # Application definition
 # Django nos permite dividir el proyecto en diferentes aplicaciones
+# También este apartado nos permite conectar nuestro proyecto principal con la nueva aplicación
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -45,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'myapp', # Nuestro proyecto principal ya reconoce a la carpeta de myapp
 ]
 
 # Este apartado determinara las aplicaciones que se usaran en el proyecto

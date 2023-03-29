@@ -15,5 +15,5 @@ urlpatterns = [
     path('', views.hello), # Otra forma de importar la vista es: path('', views.hello)
 
     # Llamamos a la segunda vista que hemos creado en views.py
-    path('hello2/', views.hello2),
+    path('hello2/', views.hello2), # Para entrar a esta ruta, debemos escribir: /home/hello2/
 ]
