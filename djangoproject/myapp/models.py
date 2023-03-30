@@ -8,6 +8,9 @@ class Proyecto(models.Model):
     # Definimos los campos de la tabla Proyecto y los tipos de datos que contendrán
     name = models.CharField(max_length=50) # Especificamos la cantidad de caracteres que contendrá el campo
 
+    # Definimos el método __str__ para que nos muestre el nombre del proyecto en el panel de administración
+    def __str__(self):
+        return self.name
 
 # Crearemos una nueva clase que almacenara tareas
 class task (models.Model): 
@@ -19,3 +22,9 @@ class task (models.Model):
 
     # Usamos el comando ForeignKey para relacionar la tarea con otra tabla
     project = models.ForeignKey (Proyecto, on_delete=models.CASCADE) # Ponemos on_delete=models.CASCADE, Para que cuando se elimine un elemento, se eliminen también los que tienen una relación con el.
+
+    # Definimos el método __str__ para que nos muestre el nombre del proyecto en el panel de administración
+    def __str__(self):
+        return self.tittle + ' - ' + self.project.name
+    #Podemos agregar los otros campos como self.description
+        

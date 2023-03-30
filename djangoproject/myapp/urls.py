@@ -15,5 +15,14 @@ urlpatterns = [
     path('', views.hello), # Otra forma de importar la vista es: path('', views.hello)
 
     # Llamamos a la segunda vista que hemos creado en views.py
-    path('hello2/', views.hello2), # Para entrar a esta ruta, debemos escribir: /home/hello2/
+    path('hello2/', views.hello2), # Para entrar a esta ruta, debemos escribir: /hello2/
+
+    # Crearemos una ruta que esperará un parámetro usermane
+    path('usernam/<str:username>', views.usernam), # Para entrar a esta ruta, debemos escribir: /home/hello3/username    
+
+    # Crearemos una ruta que nos permita mostrar los proyectos que tenemos en nuestra base de datos
+    path('projects/', views.projects), # Para entrar a esta ruta, debemos escribir: /projects/
+
+    # Crearemos una ruta que nos permita mostrar las tareas que tenemos en nuestra base de datos
+    path('tasks/<int:id>', views.tasks), # Para entrar a esta ruta, debemos escribir: /tasks/
 ]
