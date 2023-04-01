@@ -1,0 +1,29 @@
+<!--Llamamos el navbar-->
+{% extends 'layouts/navbar.html' %}
+
+<!--Insertamos el contenido en la variable que creamos anteriormente-->
+{% block content %}
+
+    <title>Tareas de proyectos</title>
+
+
+    <h1> Welcome Taks</h1>
+    <h1>Tasks</h1>
+    {# Otra forma de hacer un comentario #}
+
+    <!--Creamos un ciclo for para mostrar los datos en un render de html-->
+    {% for task in tasks %}
+
+        <!--Crearemos una codicional que nos idique si la tarea esta realizada o no-->
+        <p>Task tittle:  {{ task.tittle }} 
+            {% if task.done == False %} ⌛ {% else %} ✅ {% endif %}
+        </p>
+        <p>Task description:  {{ task.description }}</p>
+        <p>project: {{ task.project.id }}</p>
+        <button>Delete</button>
+        <button>✅ Done</button>
+        <hr>
+        
+    {% endfor %}
+
+{% endblock %}

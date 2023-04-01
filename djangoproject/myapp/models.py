@@ -23,6 +23,9 @@ class task (models.Model):
     # Usamos el comando ForeignKey para relacionar la tarea con otra tabla
     project = models.ForeignKey (Proyecto, on_delete=models.CASCADE) # Ponemos on_delete=models.CASCADE, Para que cuando se elimine un elemento, se eliminen también los que tienen una relación con el.
 
+    # Usamos el comando BooleanField para definir un campo booleano de las tareas
+    done = models.BooleanField (default=False) # Ponemos fFlse por defecto 
+
     # Definimos el método __str__ para que nos muestre el nombre del proyecto en el panel de administración
     def __str__(self):
         return self.tittle + ' - ' + self.project.name

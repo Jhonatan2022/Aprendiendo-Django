@@ -1,0 +1,22 @@
+<!--Llamamos el navbar-->
+{% extends 'layouts/navbar.html' %}
+
+<!--Insertamos el contenido en la variable que creamos anteriormente-->
+{% block content %}
+
+<title>Proyectos</title>
+
+
+<h1>Welcome</h1>
+
+<p>Data projects</p>
+
+<!--Creamos un ciclo for para mostrar los datos en un render de html-->
+{% for project in projects %}
+
+<p>Project name: {{ project.name }}</p>
+<button>Delete</button>
+<button>Update</button>
+{% endfor %} 
+
+{% endblock %}

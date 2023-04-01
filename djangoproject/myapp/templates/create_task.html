@@ -1,0 +1,39 @@
+<!--Llamamos el navbar-->
+{% extends 'layouts/navbar.html' %}
+
+<!--Insertamos el contenido en la variable que creamos anteriormente-->
+{% block content %}
+
+<title>Administración de tareas</title>
+
+<h1>Create new task</h1>
+
+<!--Creamos un botón para enviar el formulario-->
+<form method="post">
+  <!--Llamamos la variable que creamos-->
+
+  <!--Insertamos la variable -->
+  {% csrf_token %}
+
+  {{ form.as_p}}
+  <button type="submit">Create</button>
+</form>
+
+<!--Creamos una condicional que lance error si el usuario no ingresa nada
+
+
+    if request.method == 'POST':
+        # Creamos una variable que nos permita obtener los datos del formulario
+        form = taskForm(request.POST)
+        # Creamos una condición para que si el formulario es válido, nos guarde los datos en la base de datos
+        if form.is_valid():
+            form.save()
+            return redirect('tasks')
+    else:
+        form = taskForm()
+    return render(request, 'create_task.html', {
+        'form': form
+    })
+-->
+
+{% endblock %}

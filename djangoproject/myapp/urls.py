@@ -24,5 +24,8 @@ urlpatterns = [
     path('projects/', views.projects), # Para entrar a esta ruta, debemos escribir: /projects/
 
     # Crearemos una ruta que nos permita mostrar las tareas que tenemos en nuestra base de datos
-    path('tasks/<int:id>', views.tasks), # Para entrar a esta ruta, debemos escribir: /tasks/
+    path('tasks/', views.tasks), # Para entrar a esta ruta, debemos escribir: /tasks/
+
+    # Creamos una ruta en donde el usuario podra crear una nueva tarea
+    path('create_task/', views.create_task), # Para entrar a esta ruta, debemos escribir: /newtask/
 ]
