@@ -4,7 +4,7 @@
 from django.urls import path
 
 # Importamos las vistas de nuestra aplicación
-from . import views # El punto indica que estamos en la misma carpeta
+from . import views  # El punto indica que estamos en la misma carpeta
 
 
 # Exportaremos las rutas de nuestra aplicación para que las podamos importar en el archivo urls.py de nuestro proyecto
@@ -12,20 +12,30 @@ from . import views # El punto indica que estamos en la misma carpeta
 urlpatterns = [
 
     # Si dejamos la ruta vacia, nos enviara a la vista principal de nuestra aplicación
-    path('', views.hello), # Otra forma de importar la vista es: path('', views.hello)
+    # Otra forma de importar la vista es: path('', views.hello)
+    path('', views.hello, name="index"), # Asignamos un nombre a la ruta
 
     # Llamamos a la segunda vista que hemos creado en views.py
-    path('hello2/', views.hello2), # Para entrar a esta ruta, debemos escribir: /hello2/
+    # Para entrar a esta ruta, debemos escribir: /hello2/
+    path('hello2/', views.hello2, name="index2"), # Asignamos un nombre a la ruta
 
     # Crearemos una ruta que esperará un parámetro usermane
-    path('usernam/<str:username>', views.usernam), # Para entrar a esta ruta, debemos escribir: /home/hello3/username    
+    # Para entrar a esta ruta, debemos escribir: /home/hello3/username
+    path('usernam/<str:username>', views.usernam, name="username"), #Asignamos nombre a la ruta
 
     # Crearemos una ruta que nos permita mostrar los proyectos que tenemos en nuestra base de datos
-    path('projects/', views.projects), # Para entrar a esta ruta, debemos escribir: /projects/
+    # Para entrar a esta ruta, debemos escribir: /projects/
+    path('projects/', views.projects, name="projects"), # Asignamos nombre a la ruta
 
     # Crearemos una ruta que nos permita mostrar las tareas que tenemos en nuestra base de datos
-    path('tasks/', views.tasks), # Para entrar a esta ruta, debemos escribir: /tasks/
+    # Para entrar a esta ruta, debemos escribir: /tasks/
+    path('tasks/', views.tasks, name="tasks"), # Asignamos nombre a la ruta
 
     # Creamos una ruta en donde el usuario podra crear una nueva tarea
-    path('create_task/', views.create_task), # Para entrar a esta ruta, debemos escribir: /newtask/
+    # Para entrar a esta ruta, debemos escribir: /newtask/
+    path('create_task/', views.create_task, name="createtask"), # Asignamos nombre a la ruta
+
+    # Creamos una ruta en donde el usuario podra crear un proyecto
+    # Para entrar a esta ruta, debemos escribir: /edit_project/id
+    path('create_project/', views.create_project, name="createproject"), # Asignamos nombre a la ruta
 ]

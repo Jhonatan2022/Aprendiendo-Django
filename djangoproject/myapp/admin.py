@@ -3,7 +3,8 @@
 
 
 from django.contrib import admin
-from .models import Proyecto, task # Importamos los modelos que hemos creado en el archivo models.py
+# Importamos los modelos que hemos creado en el archivo models.py
+from .models import Proyecto, task
 
 # Register your models here.
 

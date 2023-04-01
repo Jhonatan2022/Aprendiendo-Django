@@ -1,0 +1,22 @@
+/*Definimos nuestras variables*/
+:root{
+    --fondo-container: #ad7aff;
+    --fondo-pagina: #b5b5b5;
+}
+
+/*Definimos el fondo de la pagina*/
+body {
+    background-color: var(--fondo-pagina);
+}
+
+/*Definimos el fondo del container*/
+.container {
+    max-width: 1000px;
+    margin: auto;
+    background-color: var(--fondo-container);
+}
+
+/*Ajustamos las cartas y su alineación*/
+.card{
+    display: flex;
+}

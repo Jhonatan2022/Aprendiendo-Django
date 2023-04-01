@@ -1,0 +1,34 @@
+<!--Llamamos el navbar-->
+{% extends 'layouts/navbar.html' %}
+
+<!--Llamamos la función para cargar contenido estatico-->
+{% load static %}
+
+
+<!--Insertamos el contenido en la variable que creamos anteriormente-->
+{% block content %}
+
+<title>Create projects</title>
+
+
+<h1>Welcome Create a new project</h1>
+
+<!--Insertamos la variable -->
+{% csrf_token %}
+
+
+<!--Creamos el formulario-->
+<form method="POST">
+    <!--Insertamos la variable -->
+    {% csrf_token %}
+
+    {{ form }}
+
+    <button>Create</button>
+
+    </p>
+
+    <img src="{% static 'logo3.webp' %}" alt="" width="320">
+
+
+    {% endblock %}

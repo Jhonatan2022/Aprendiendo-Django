@@ -14,11 +14,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include # Utilizando include podremos importar las rutas de nuestra aplicación
+# Utilizando include podremos importar las rutas de nuestra aplicación
+from django.urls import path, include
 
 
 # Importamos la vista que hemos creado en views.py
-#from myapp import views # Otra forma de importar la vista es:  from myapp.views import hello
+# from myapp import views # Otra forma de importar la vista es:  from myapp.views import hello
 
 # En este apartado pondremos las rutas del proyecto que los usuarios podran acceder
 urlpatterns = [
@@ -26,5 +27,6 @@ urlpatterns = [
 
     # Importamos las rutas de nuestra aplicación
     # Podemos agregarle un prefijo a las rutas de nuestra aplicación con el argumento 'home/'
-    path('', include('myapp.urls')), # Dejamos la ruta vacia para que nos muestre la vista principal de nuestra aplicación para no tener que poner rutas precedentes
+    # Dejamos la ruta vacia para que nos muestre la vista principal de nuestra aplicación para no tener que poner rutas precedentes
+    path('', include('myapp.urls')),
 ]
