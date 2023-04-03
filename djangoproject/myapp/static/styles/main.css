@@ -1,6 +1,6 @@
 /*Definimos nuestras variables*/
 :root{
-    --fondo-container: #ad7aff;
+    --fondo-container: #838383;
     --fondo-pagina: #b5b5b5;
 }
 
@@ -10,11 +10,16 @@ body {
 }
 
 /*Definimos el fondo del container*/
-.container {
-    max-width: 1000px;
+.containe {
+    border-radius: 15px;
+    width: clamp(300px, 95%, 90%);
     margin: auto;
     background-color: var(--fondo-container);
 }
+
+/* ------------------------------------------------------------------------------
+Estilos del contenedor y de las cartas
+*/ ------------------------------------------------------------------------------
 
 /*Ajustamos las cartas y su alineación*/
 .card{

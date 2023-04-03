@@ -24,8 +24,18 @@ urlpatterns = [
     path('usernam/<str:username>', views.usernam, name="username"), #Asignamos nombre a la ruta
 
     # Crearemos una ruta que nos permita mostrar los proyectos que tenemos en nuestra base de datos
+    
+    # Creamos una ruta en donde el usuario podra crear un proyecto
+    # Para entrar a esta ruta, debemos escribir: /edit_project/id
+    path('create_project/', views.create_project, name="createproject"), # Asignamos nombre a la ruta
+
+
     # Para entrar a esta ruta, debemos escribir: /projects/
     path('projects/', views.projects, name="projects"), # Asignamos nombre a la ruta
+    
+    # Creamos una ruta donde el usuario pofrá ver los detalles del un proyecto
+    path('projects/<int:id>', views.project_detail, name="projectdetail"), # Asignamos nombre a la ruta
+
 
     # Crearemos una ruta que nos permita mostrar las tareas que tenemos en nuestra base de datos
     # Para entrar a esta ruta, debemos escribir: /tasks/
@@ -33,9 +43,5 @@ urlpatterns = [
 
     # Creamos una ruta en donde el usuario podra crear una nueva tarea
     # Para entrar a esta ruta, debemos escribir: /newtask/
-    path('create_task/', views.create_task, name="createtask"), # Asignamos nombre a la ruta
-
-    # Creamos una ruta en donde el usuario podra crear un proyecto
-    # Para entrar a esta ruta, debemos escribir: /edit_project/id
-    path('create_project/', views.create_project, name="createproject"), # Asignamos nombre a la ruta
+    path('create_task/', views.create_task, name="createtask"), # Asignamos nombre a la ruta   
 ]

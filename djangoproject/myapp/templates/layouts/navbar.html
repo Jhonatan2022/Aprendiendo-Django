@@ -29,11 +29,11 @@
   <body>
     <!--Creamos un menú-->
 
-    <nav class="navbar navbar-dark bg-dark">
+    <nav class="navbar navbar-dark bg-dark mb-5">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="{% url 'index' %}">
           <img class="image" src="{% static 'logo3.webp' %}" alt="" width="50" height="40" class="d-inline-block align-text-top">
-          Offcanvas dark navbar</a>
+          Project Django</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -53,7 +53,7 @@
           <div class="offcanvas-header">
             <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">
               <img class="image" src="{% static 'logo3.webp' %}" alt="" width="50" height="40" class="d-inline-block align-text-top">
-              Dark offcanvas
+              Project Django
             </h5>
             <button
               type="button"
@@ -65,7 +65,7 @@
           <div class="offcanvas-body">
             <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Home</a>
+                <a class="nav-link active" aria-current="page" href="{% url 'index' %}">HOME</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">Link</a>
@@ -95,7 +95,7 @@
                     <hr class="dropdown-divider" />
                   </li>
                   <li>
-                    <a class="dropdown-item" href="#">Something else here</a>
+                    <a class="dropdown-item" href="#">ddd</a>
                   </li>
                 </ul>
               </li>
@@ -141,7 +141,7 @@
       </div>
     </nav>
 
-    <main class="container">
+    <main class="containe mb-3">
       <!--Creamos un block de contenido para la información-->
       {% block content %} {% endblock %}
     </main>

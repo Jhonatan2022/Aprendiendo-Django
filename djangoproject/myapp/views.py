@@ -8,7 +8,7 @@ from django.http import HttpResponse, JsonResponse
 # Importamos el modelo Proyecto para poder crear una vista de consultas
 from .models import Proyecto, task  # Importamos el modelo Proyecto y task
 # Importamos la función get_list_or_404 para poder crear una vista de error 404
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, get_list_or_404
 # Importamos render para renderizar un template y redirect para redireccionar a una ruta
 from django.shortcuts import render, redirect
 # Importamos el formulario que hemos creado en forms.py
@@ -48,22 +48,6 @@ def usernam(request, username):
     return HttpResponse("<h1> Welcome %s </h1>" % weolcome)
 
 
-# Creamos una vista que nos permita mostrar los proyectos que tenemos en nuestra base de datos
-def projects(request):
-
-    # Creamos una variable que nos permita e almacenamos los datos en una lista de diccionarios
-    # proyectos = list(Proyecto.objects.values()) # values() nos permite obtener los valores de los campos de la tabla Proyecto
-
-    # Crearemos una consulta para mostrarlos en la vista de los tamplates
-    # Usamos el método all para obtener todos los datos de la tabla Proyecto
-    datosprojects = Proyecto.objects.all()
-
-    # Imprimimos los proyectos que tenemos en nuestra base de datos
-    return render(request, 'projects/projects.html', {
-        'projects': datosprojects
-    })  # safe=False nos permite enviar datos en formato json
-
-
 # Creamos una vista que nos permita mostrar las tareas que tenemos en nuestra base de datos
 def tasks(request):
 
@@ -98,8 +82,26 @@ def create_task(request):
         # Redireccionamos a la ruta tasks
         return redirect('tasks')
 
+# Creamos una vista que nos permita mostrar los proyectos que tenemos en nuestra base de datos
+
+
+def projects(request):
+
+    # Creamos una variable que nos permita e almacenamos los datos en una lista de diccionarios
+    # proyectos = list(Proyecto.objects.values()) # values() nos permite obtener los valores de los campos de la tabla Proyecto
+
+    # Crearemos una consulta para mostrarlos en la vista de los tamplates
+    # Usamos el método all para obtener todos los datos de la tabla Proyecto
+    datosprojects = Proyecto.objects.all()
+
+    # Imprimimos los proyectos que tenemos en nuestra base de datos
+    return render(request, 'projects/projects.html', {
+        'projects': datosprojects
+    })  # safe=False nos permite enviar datos en formato json
 
 # Creamos una vista para que el usuario pueda crear un nuevo proyecto
+
+
 def create_project(request):
 
     # Creamos una condicional para que si el usuario envia un formulario, nos guarde los datos en la base de datos.
@@ -112,3 +114,22 @@ def create_project(request):
 
     # Redireccionamos a la ruta projects
     return redirect('projects')
+
+
+# Creamos una vista unica para mostrar los datos de un projecto
+def project_detail(request, id):
+    # Creamos una consulta para mostrarlos en la vista de los tamplates
+    # Usamos el método all para obtener todos los datos de la tabla Proyecto
+
+    # Lanzamos un pagina de error 404 en caso de que no exista el proyecto
+    datosprojects = get_object_or_404(Proyecto, id=id)
+
+    # Hacemos una consulta para obtener los datos de las tareas que coincidan con el id del proyecto
+    tasks = task.objects.filter(project_id=id)
+
+    # Renderizamos el template project_detail.html
+    return render(request, 'projects/detail.html', {
+        'project': datosprojects,
+        'tasks': tasks
+
+    })

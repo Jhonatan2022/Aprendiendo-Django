@@ -1,0 +1,44 @@
+<!--Llamamos el navbar-->
+{% extends 'layouts/navbar.html' %}
+
+<!--Insertamos el contenido en la variable que creamos anteriormente-->
+{% block content %}
+
+<title>Detail project</title>
+
+
+<h1 align="center" class="mb-4">Details of: {{ project }}</h1>
+
+<!--Creamos un bucle for para imprimir todas las tareas del proyecto-->
+<h1>{{ task.tittle }}</h1>
+
+
+
+<div class="row row-cols-1 row-cols-md-2 g-3" style="justify-content: center;" >
+    <!--Creamos un ciclo for para mostrar los datos en un render de html-->
+    {% for task in tasks %} {# Otra forma de hacer un comentario #}
+    <div
+      class="card border-primary mb-2 mx-3"
+      style="max-width: 21rem; border: 4px solid"
+    >
+      <div class="card-body bg-transparent border-primary">
+        Tasks of: {{ task.project.id }}
+      </div>
+  
+      <div class="card-body text-primary">
+        <!--Crearemos una codicional que nos idique si la tarea esta realizada o no-->
+        <h5 class="card-title">
+          {{ task.tittle }} {% if task.done == False %} ⌛ {% else %} ✅ {% endif %}
+        </h5>
+        <p class="card-text">{{ task.description }}</p>
+      </div>
+      <div class="card-footer bg-transparent border-primary">
+        <button type="button" class="btn btn-success">Done ✔</button>
+        <button type="button" class="btn btn-danger">Delete ✘</button>
+      </div>
+    </div>
+  
+    {% endfor %}
+  </div>
+
+{% endblock %}

@@ -14,7 +14,8 @@ class Createtask(forms.Form):
     # Creamos un campo de tipo CharField para la descripción de la tarea
     description = forms.CharField(
         label="Descripción de la tarea", widget=forms.Textarea)
-
+    
+    # Creamos un campo para seleccionar el proyecto al que pertenece la tarea o crear uno nuevo proyecto
 
 # Crearemos una clase para un formulario para crear un proyecto
 class Createproject(forms.Form):
