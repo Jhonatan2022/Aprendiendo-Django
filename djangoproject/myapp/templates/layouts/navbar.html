@@ -25,6 +25,9 @@
       integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
       crossorigin="anonymous"
     />
+
+    <!--Llamamos el generador de sweet alert-->
+    <script src="{% static ' https://cdn.jsdelivr.net/npm/sweetalert2@11' %} "></script>
   </head>
   <body>
     <!--Creamos un menú-->
@@ -32,8 +35,16 @@
     <nav class="navbar navbar-dark bg-dark mb-5">
       <div class="container-fluid">
         <a class="navbar-brand" href="{% url 'index' %}">
-          <img class="image" src="{% static 'logo3.webp' %}" alt="" width="50" height="50" class="d-inline-block align-text-top">
-          Project Django</a>
+          <img
+            class="image"
+            src="{% static 'logo3.webp' %}"
+            alt=""
+            width="50"
+            height="50"
+            class="d-inline-block align-text-top"
+          />
+          Project Django</a
+        >
         <button
           class="navbar-toggler"
           type="button"
@@ -52,7 +63,14 @@
         >
           <div class="offcanvas-header">
             <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">
-              <img class="image" src="{% static 'logo3.webp' %}" alt="" width="50" height="40" class="d-inline-block align-text-top">
+              <img
+                class="image"
+                src="{% static 'logo3.webp' %}"
+                alt=""
+                width="50"
+                height="40"
+                class="d-inline-block align-text-top"
+              />
               Project Django
             </h5>
             <button
@@ -65,11 +83,25 @@
           <div class="offcanvas-body">
             <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{% url 'index' %}">HOME</a>
+                <a
+                  class="nav-link active"
+                  aria-current="page"
+                  href="{% url 'index' %}"
+                  >HOME</a
+                >
               </li>
+              <!--Creamos una condicional para validad cuando el usuario esta logueado-->
+              {% if user.is_authenticated %}
               <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
+                <a class="nav-link" href="{% url 'singup' %}">Logout</a>
               </li>
+              {% else %}
+              <!--En caso de que el usuario no este auntentcado-->
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'singup' %}">Singup</a>
+              </li>
+              {% endif %}
+
               <li class="nav-item dropdown">
                 <a
                   class="nav-link dropdown-toggle"

@@ -4,9 +4,18 @@
 <!--Insertamos el contenido en la variable que creamos anteriormente-->
 {% block content %}
 
-<title>Login</title>
+<title>Singup</title>
 
 <!--llamamos la bariable que creamos como titulo-->
-<h1>{{ titulo }} {{user}}</h1>
+<h1>{{ titulo }}</h1>
+
+
+<p>{{ error }}</p>
+
+<form method="post" action="{% url 'singup' %}">
+  <!--Creamos el token del formulario-->
+  {% csrf_token %} {{ form.as_p }}
+  <button>singup</button>
+</form>
 
 {% endblock %}

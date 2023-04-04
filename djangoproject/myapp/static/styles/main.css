@@ -12,9 +12,15 @@ body {
 /*Definimos el fondo del container*/
 .containe {
     border-radius: 15px;
-    width: clamp(300px, 95%, 90%);
+    width: clamp(300px, 95%, 80%);
     margin: auto;
     background-color: var(--fondo-container);
+}
+
+@media screen and (max-width: 350px) {
+    .containe {
+        width: 80%;
+    }
 }
 
 /* ------------------------------------------------------------------------------

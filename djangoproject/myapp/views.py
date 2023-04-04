@@ -2,25 +2,41 @@
 
 # Importamos la función render para poder crear una vista
 from django.shortcuts import render
+
 # Importamos el modelo http para poder crear una vista
 # JsonResponse nos permite enviar datos en formato json
 from django.http import HttpResponse, JsonResponse
+
 # Importamos el modelo Proyecto para poder crear una vista de consultas
 from .models import Proyecto, task  # Importamos el modelo Proyecto y task
+
 # Importamos la función get_list_or_404 para poder crear una vista de error 404
 from django.shortcuts import get_object_or_404, get_list_or_404
+
 # Importamos render para renderizar un template y redirect para redireccionar a una ruta
 from django.shortcuts import render, redirect
+
 # Importamos el formulario que hemos creado en forms.py
 # Importamos el formulario Createtask y createproject
 from .forms import Createtask, Createproject
 
+# Importamos un modelo para crear un formulario de registro
+from django.contrib.auth.forms import UserCreationForm
+
+# IMportamos un modelo para crear usuarios
+from django.contrib.auth.models import User
+
+# Importamos un modelo para certificar el token del usuario
+from django.contrib.auth import login
+
+# Importamos un modelo para validar errores especificos
+from django.db import IntegrityError
+
+
+
 # Create your views here.
-
-# Crearemos una vista que nos permita mostrar un mensaje en la página principal de nuestra aplicación
-
-
-def hello(request):
+# Crearemos una vista que para mostrar un mensaje en la página principal
+def index(request):
 
     tittle = "Welcome to my first Django project"
     # Creamos un render que nos permita mostrar un template en la página principal de nuestra aplicación
@@ -29,9 +45,56 @@ def hello(request):
     })
 
 
-# Creamos una vista que nos permita mostrar un mensaje en la página principal de nuestra aplicación
-def hello2(request):
-    return HttpResponse("<h1> Second hello world </h1>")
+# Creamos una vista que en donde el usuario podrá registrarse
+def singup(request):
+
+    # Creamos una condicional para que si el usuario envia un formulario, nos guarde los datos en la base de datos.
+    if request.method == 'GET':
+        # Renderizamos el formulario de registro en caso de que el usuario no envie un formulario
+        return render(request, "singup.html", {
+
+            # Creamos un formulario de registro que suministra Django
+            "form": UserCreationForm()
+        })
+    else:
+        # Creamos una condicional para validad que las contraseñas coincidan
+        if request.POST['password1'] == request.POST['password2']:
+
+            # Creamos un try para que si el usuario ya existe, nos muestre un mensaje de error o en caso de un error por la base de datos
+            try:
+                # Creamos un nuevo usuario y le pasamos los datos que nos envia el usuario
+                user = User.objects.create_user(username=request.POST['username'],
+                                                password=request.POST['password1'])
+
+                # Guardamos los datos del usuario en la base de datos
+                user.save()
+
+                # Creamos una sesión para el usuario
+                login(request, user)
+
+                # Mostramos un mensaje de que el usuario ha sido creado correctamente
+                # return HttpResponse("<h1> Usuario creado correctamente </h1>")
+                # Redireccionamos a la ruta index
+                return redirect('index')
+
+            except IntegrityError:
+                # En caso de que el usuario ya exista, nos redirecciona a la ruta singup
+                # Renderizamos el formulario de registro en caso de que el usuario no envie un formulario
+                return render(request, "singup.html", {
+
+                    # Creamos un formulario de registro que suministra Django
+                    "form": UserCreationForm(),
+                    "error": "El nombre de usuario ya existe"
+                })
+
+        # En caso de que las contraseñas no coincidan, nos redirecciona a la ruta singup
+        # Renderizamos el formulario de registro en caso de que el usuario no envie un formulario
+        return render(request, "singup.html", {
+
+            # Creamos un formulario de registro que suministra Django
+            "form": UserCreationForm(),
+            "error": "Las contraseñas no coinciden"
+        })
 
 
 # Creamos una vista que nos permita mostras un mensaje de bienvenida al usuario
@@ -109,7 +172,10 @@ def create_project(request):
         return render(request, 'projects/create_project.html', {
             'form': Createproject()
         })
+
+    # En caso de que el usuario envie un formulario, nos guarde los datos en la base de datos
     else:
+        # Creamos un nuevo proyecto y le pasamos los datos que nos envia el usuario
         Proyecto.objects.create(name=request.POST['name'])
 
     # Redireccionamos a la ruta projects
