@@ -6,22 +6,21 @@
 
 <title>Tareas de proyectos</title>
 
-<div class="row row-cols-1 row-cols-md-2 g-3" style="justify-content: center;" >
+<div class="row row-cols-1 row-cols-md-2 g-3" style="justify-content: center">
   <!--Creamos un ciclo for para mostrar los datos en un render de html-->
   {% for task in tasks %} {# Otra forma de hacer un comentario #}
   <div
     class="card border-primary mb-2 mx-3"
-    style="max-width: 21rem; border: 4px solid"
+    style="max-width: 20rem; border: 4px solid"
   >
     <div class="card-body bg-transparent border-primary">
       project: {{ task.project.id }}
+      <div style="text-align: right; margin-top: -1.6em;">{% if task.done == False %} ⌛ {% else %} ✅ {% endif %}</div>
     </div>
 
     <div class="card-body text-primary">
       <!--Crearemos una codicional que nos idique si la tarea esta realizada o no-->
-      <h5 class="card-title">
-        {{ task.tittle }} {% if task.done == False %} ⌛ {% else %} ✅ {% endif %}
-      </h5>
+      <h5 class="card-title">{{ task.tittle }}</h5>
       <p class="card-text">{{ task.description }}</p>
     </div>
     <div class="card-footer bg-transparent border-primary">

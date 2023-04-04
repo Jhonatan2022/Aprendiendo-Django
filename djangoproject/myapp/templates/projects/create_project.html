@@ -4,31 +4,30 @@
 <!--Llamamos la función para cargar contenido estatico-->
 {% load static %}
 
-
 <!--Insertamos el contenido en la variable que creamos anteriormente-->
 {% block content %}
 
 <title>Create projects</title>
 
-
-<h1>Welcome Create a new project</h1>
+<h1 align="center" >Welcome Create a new project</h1>
 
 <!--Insertamos la variable -->
 {% csrf_token %}
 
-
 <!--Creamos el formulario-->
 <form method="POST">
-    <!--Insertamos la variable -->
-    {% csrf_token %}
+  <!--Insertamos la variable -->
+  {% csrf_token %}
 
-    {{ form }}
+  <div class="row g-3 align-items-center" style="justify-content: center">
+    <div class="col-auto">
+      {{ form}}
+      <button type="submit" class="btn btn-success mt-3 mb-4">Create Project
+        <img src="{% static 'logo3.webp' %}" alt="" width="20" /></button>
+    </div>
+  </div>
 
-    <button>Create</button>
+  
+</form>
 
-    </p>
-
-    <img src="{% static 'logo3.webp' %}" alt="" width="320">
-
-
-    {% endblock %}
+{% endblock %}

@@ -6,7 +6,7 @@
 
 <title>Administración de tareas</title>
 
-<h1>Create new task</h1>
+<h1 align="center" >Create new task</h1>
 
 <!--Creamos un botón para enviar el formulario-->
 <form method="post">
@@ -15,8 +15,14 @@
   <!--Insertamos la variable -->
   {% csrf_token %}
 
-  {{ form.as_p}}
-  <button type="submit">Create</button>
+  <div class="row g-3 align-items-center" style="justify-content: center;">
+    <div class="col-auto">
+       {{ form.as_p}}
+  <button type="submit" class="btn btn-success mb-4">Create</button>
+    </div>
+  </div>
+
+ 
 </form>
 
 <!--Creamos una condicional que lance error si el usuario no ingresa nada
