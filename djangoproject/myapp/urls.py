@@ -15,17 +15,23 @@ urlpatterns = [
     # Otra forma de importar la vista es: path('', views.hello)
     path('', views.index, name="index"),  # Asignamos un nombre a la ruta
 
+
     # Creamos una ruta que nos permita mostrar el formulario de registro
     # Asignamos un nombre a la ruta
     path('singup/', views.singup, name='singup'),
 
-    # Crearemos una ruta que esperará un parámetro usermane
-    # Para entrar a esta ruta, debemos escribir: /home/hello3/username
-    path('usernam/<str:username>', views.usernam,
-         name="username"),  # Asignamos nombre a la ruta
+
+    # Crearemos una ruta para el cierre de sesión del usuario
+    # Asignamos un nombre a la ruta
+    path('logout/', views.singout, name='logout'),
+
+
+    # Crearemos una ruta para el inicio de sesión del usuario
+    # Asignamos un nombre a la ruta
+    path('login/', views.login_user, name='login'),
+
 
     # Crearemos una ruta que nos permita mostrar los proyectos que tenemos en nuestra base de datos
-
     # Creamos una ruta en donde el usuario podra crear un proyecto
     # Para entrar a esta ruta, debemos escribir: /edit_project/id
     path('create_project/', views.create_project,
@@ -36,6 +42,7 @@ urlpatterns = [
     # Asignamos nombre a la ruta
     path('projects/', views.projects, name="projects"),
 
+
     # Creamos una ruta donde el usuario pofrá ver los detalles del un proyecto
     path('projects/<int:id>', views.project_detail,
          name="projectdetail"),  # Asignamos nombre a la ruta
@@ -45,8 +52,11 @@ urlpatterns = [
     # Para entrar a esta ruta, debemos escribir: /tasks/
     path('tasks/', views.tasks, name="tasks"),  # Asignamos nombre a la ruta
 
+
     # Creamos una ruta en donde el usuario podra crear una nueva tarea
     # Para entrar a esta ruta, debemos escribir: /newtask/
     # Asignamos nombre a la ruta
     path('create_task/', views.create_task, name="createtask"),
+
+
 ]

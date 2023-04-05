@@ -27,7 +27,7 @@
     />
 
     <!--Llamamos el generador de sweet alert-->
-    <script src="{% static ' https://cdn.jsdelivr.net/npm/sweetalert2@11' %} "></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </head>
   <body>
     <!--Creamos un menú-->
@@ -93,12 +93,15 @@
               <!--Creamos una condicional para validad cuando el usuario esta logueado-->
               {% if user.is_authenticated %}
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'singup' %}">Logout</a>
+                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
               </li>
               {% else %}
               <!--En caso de que el usuario no este auntentcado-->
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'singup' %}">Singup</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'login' %}">Login</a>
               </li>
               {% endif %}
 

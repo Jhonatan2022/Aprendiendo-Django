@@ -21,17 +21,16 @@ from django.shortcuts import render, redirect
 from .forms import Createtask, Createproject
 
 # Importamos un modelo para crear un formulario de registro
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
 # IMportamos un modelo para crear usuarios
 from django.contrib.auth.models import User
 
 # Importamos un modelo para certificar el token del usuario
-from django.contrib.auth import login
+from django.contrib.auth import login, logout, authenticate
 
 # Importamos un modelo para validar errores especificos
 from django.db import IntegrityError
-
 
 
 # Create your views here.
@@ -97,18 +96,46 @@ def singup(request):
         })
 
 
-# Creamos una vista que nos permita mostras un mensaje de bienvenida al usuario
-def usernam(request, username):
+# Creamos una función para que el usuario pueda cerrar sesión
+def singout(request):
 
-    # Creamos una condición para que si el usuario no ingresa un nombre, nos muestre un mensaje de error
-    if username == '':
-        return HttpResponse("<h1> Error, no has ingresado un nombre </h1>")
+    # Cerramos la sesión del usuario
+    logout(request)
 
-    # Mostremos un mensaje de bienvenida al usuario
-    weolcome = username + " this is my first Django project"
+    # Redireccionamos a la ruta index
+    return redirect('index')
 
-    # Retornamos el mensaje de bienvenida y concatenamos el nombre del usuario
-    return HttpResponse("<h1> Welcome %s </h1>" % weolcome)
+
+# Creamos una vista para que el usuario pueda iniciar sesión
+def login_user(request):
+
+    # Creamos una condicional para que si el usuario envia un formulario, nos guarde los datos en la base de datos.
+    if request.method == 'GET':
+        # Renderizamos el formulario de inicio de sesión
+        return render(request, "login.html", {
+            # Creamos un formulario de inicio de sesión que suministra Django
+            "form": AuthenticationForm()
+        })
+    else:
+        # Auntentificamos si el usuario existe en la base de datos
+        user = authenticate(
+            request, username=request.POST['username'], password=request.POST['password'])
+        
+        # Creamos una condicional para validar si el usuario existe en la base de datos
+        if user is None:
+            # Renderizamos el formulario de inicio de sesión
+            return render(request, "login.html", {
+                # Creamos un formulario de inicio de sesión que suministra Django
+                "form": AuthenticationForm(),
+                "error": "El nombre de usuario o la contraseña son incorrectos"
+            })
+        # En caso de que el usuario exista en la base de datos creamos una sesión para el usuario
+        else:
+            # Creamos una sesión para el usuario
+            login(request, user)
+
+            # Redireccionamos a la ruta index
+            return redirect('index')        
 
 
 # Creamos una vista que nos permita mostrar las tareas que tenemos en nuestra base de datos
