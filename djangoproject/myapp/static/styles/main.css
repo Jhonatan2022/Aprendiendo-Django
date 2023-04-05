@@ -1,33 +1,58 @@
 /*Definimos nuestras variables*/
-:root{
-    --fondo-container: #838383;
-    --fondo-pagina: #b5b5b5;
-}
-
-/*Definimos el fondo de la pagina*/
-body {
-    background-color: var(--fondo-pagina);
+:root {
+  --fondo-container: #83838398;
+  --naranja: #ff5733;
+  --naranjaclaro: #fa826791;
+  --morado: #581845;
+  --moradoclaro: #b04f93;
+  --violeta: #c70039;
+  --blanco: white;
 }
 
 /*Definimos el fondo del container*/
 .containe {
-    border-radius: 15px;
-    width: clamp(300px, 95%, 80%);
-    margin: auto;
-    background-color: var(--fondo-container);
+  border-radius: 15px;
+  width: clamp(300px, 95%, 85%);
+  margin: auto;
+  background-color: var(--fondo-container);
+}
+
+.informacion {
+  margin-top: 5em;
+  margin-bottom: 8em;
 }
 
 @media screen and (max-width: 350px) {
-    .containe {
-        width: 80%;
-    }
+  .containe {
+    width: 80%;
+  }
+}
+
+/* ------------------------------------------------------------------------------
+Estilos del navbar
+*/
+------------------------------------------------------------------------------
+  .bg-dark {
+  background-color: var(--morado);
+  border-bottom-left-radius: 15px;
 }
 
 /* ------------------------------------------------------------------------------
 Estilos del contenedor y de las cartas
-*/ ------------------------------------------------------------------------------
+*/
+------------------------------------------------------------------------------
 
 /*Ajustamos las cartas y su alineación*/
-.card{
-    display: flex;
+.card {
+  background-color: var(--violeta);
+  display: flex;
+}
+
+.card:hover {
+  transform: scale(0.95);
+  transition: all 0.5s ease;
+}
+
+footer {
+  font-size: 15px;
 }

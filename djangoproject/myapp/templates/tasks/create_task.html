@@ -8,8 +8,12 @@
 
 <h1 align="center" >Create new task</h1>
 
+
+<!--Mostramos la variable en caso de que se generé un error-->
+<p>{{ error }}</p>
+
 <!--Creamos un botón para enviar el formulario-->
-<form method="post">
+<form action="{% url 'createtask' %}"  method="post">
   <!--Llamamos la variable que creamos-->
 
   <!--Insertamos la variable -->

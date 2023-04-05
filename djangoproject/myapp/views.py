@@ -120,7 +120,7 @@ def login_user(request):
         # Auntentificamos si el usuario existe en la base de datos
         user = authenticate(
             request, username=request.POST['username'], password=request.POST['password'])
-        
+
         # Creamos una condicional para validar si el usuario existe en la base de datos
         if user is None:
             # Renderizamos el formulario de inicio de sesión
@@ -135,7 +135,7 @@ def login_user(request):
             login(request, user)
 
             # Redireccionamos a la ruta index
-            return redirect('index')        
+            return redirect('index')
 
 
 # Creamos una vista que nos permita mostrar las tareas que tenemos en nuestra base de datos
@@ -148,7 +148,8 @@ def tasks(request):
 
     # Creamos una consulta para mostrarlos en la vista de los tamplates
     # Usamos el método all para obtener todos los datos de la tabla task
-    taks = task.objects.all()
+    # Creamos una consulta interna para que solo muestre las tareas del usuario actual
+    taks = task.objects.filter(user = request.user)# Pra filtrar las tareas no completadas completed__isnull=True
 
     # Imprimimos el id de la tarea que coincida con el id que le pasamos por parámetro
     return render(request, 'tasks/tasks.html', {
@@ -164,17 +165,36 @@ def create_task(request):
         return render(request, 'tasks/create_task.html', {
             'form': Createtask()
         })
+    # Creamos una condicional para que si el usuario envia un formulario, nos guarde los datos en la base de datos.
     else:
-        task.objects.create(tittle=request.POST['tittle'],
-                            description=request.POST['description'],
-                            project=request.POST['project'])
 
-        # Redireccionamos a la ruta tasks
-        return redirect('tasks')
+        # Metemos los parametro en un try en caso de que se generé un error
+        try:
+            # Creamos una variable que nos permita almacenar los datos que nos envia el usuario
+            form = Createtask(request.POST)
+            # Creamos una condicional para validar si el formulario es válido
+
+            # Creamos una variable que nos permita almacenar los datos que nos envia el usuario
+            new_task = form.save(commit=False)
+            # Asignamos la tarea a un usuario
+            new_task.user = request.user
+
+            # Guardamos los datos en la base de datos
+            new_task.save()
+
+            # Redireccionamos a la ruta tasks
+            return redirect('tasks')
+        
+        # En caso de que se genere un error, nos redirecciona a la ruta create_task
+        except ValueError:
+            # Renderizamos el formulario de registro en caso de que el usuario no envie un formulario
+            return render(request, 'tasks/create_task.html', {
+                'form': Createtask(),
+                'error': 'No se ha podido crear la tarea :('
+            })
+            
 
 # Creamos una vista que nos permita mostrar los proyectos que tenemos en nuestra base de datos
-
-
 def projects(request):
 
     # Creamos una variable que nos permita e almacenamos los datos en una lista de diccionarios
@@ -189,9 +209,8 @@ def projects(request):
         'projects': datosprojects
     })  # safe=False nos permite enviar datos en formato json
 
+
 # Creamos una vista para que el usuario pueda crear un nuevo proyecto
-
-
 def create_project(request):
 
     # Creamos una condicional para que si el usuario envia un formulario, nos guarde los datos en la base de datos.

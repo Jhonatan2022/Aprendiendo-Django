@@ -6,9 +6,9 @@ from django.db import models
 # Importamos el modelo User para poder relacionar las tareas con los usuarios
 from django.contrib.auth.models import User
 
+
+
 # Create your models here.
-
-
 class Proyecto(models.Model):
     # Definimos los campos de la tabla Proyecto y los tipos de datos que contendrán
     # Especificamos la cantidad de caracteres que contendrá el campo
@@ -18,9 +18,9 @@ class Proyecto(models.Model):
     def __str__(self):
         return self.name
 
+
+
 # Crearemos una nueva clase que almacenara tareas
-
-
 class task (models.Model):
 
     # Charfield nos sirve más para textos pequeños
@@ -35,7 +35,7 @@ class task (models.Model):
     
     # Creamos un campo para la fecha de completado de la tarea
     # Usamos el comando null para que acepte valores nulos
-    datecompleted = models.DateTimeField(null=True)
+    datecompleted = models.DateTimeField(null=True, blank=True)
     
     # Creamos un campo para determinar su importancia
     important = models.BooleanField(default=False)
@@ -54,5 +54,5 @@ class task (models.Model):
 
     # Definimos el método __str__ para que nos muestre el nombre del proyecto en el panel de administración
     def __str__(self):
-        return self.tittle + ' - ' + self.project.name
+        return self.tittle + ' - ' + self.project.name + ' - by ' + self.user.username
     # Podemos agregar los otros campos como self.description
