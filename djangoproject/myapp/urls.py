@@ -58,5 +58,9 @@ urlpatterns = [
     # Asignamos nombre a la ruta
     path('create_task/', views.create_task, name="createtask"),
 
+    # Creamos una ruda donde el usuario podra ver los detalles de una tarea
+    # Para entrar a esta ruta, debemos escribir: /task/id
+    # Asignamos nombre a la ruta
+    path('task/<int:id>', views.task_detail, name="taskdetail"),
 
 ]

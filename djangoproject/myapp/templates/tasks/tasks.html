@@ -14,11 +14,13 @@
   {% for task in tasks %} {# Otra forma de hacer un comentario #}
 
   <div
-    class="card  mb-3 mx-3"
-    style="background-color: white;
-    max-width: 20rem; 
-    border-radius: 25px;
-    border: 4px solid var(--moradoclaro);"
+    class="card mb-3 mx-3"
+    style="
+      background-color: white;
+      max-width: 20rem;
+      border-radius: 25px;
+      border: 4px solid var(--moradoclaro);
+    "
   >
     <div class="card-header">
       <b>By:</b> {{ task.user.username }}
@@ -31,22 +33,45 @@
       <p class="card-text">{{ task.description }}</p>
     </div>
     <div class="card-footer">Created: {{ task.created }}</div>
-    <div class="card-footer">
-      <button type="button" class="btn btn-success me-4" 
-      style="background-color: var(--naranja);
-      border: 2px solid var(--naranja);
-      ">Done ✓</button>
-      <button type="button" class="btn btn-danger"
-      style="background-color: var(--violeta);
-      border: 2px solid var(--violeta);
-      margin-right: 2.4em;">Delete ✘</button>
+    <div class="card-footer" style="padding: 10px;">
+      <button
+        type="button"
+        class="btn btn-success"
+        style="
+          background-color: var(--naranja);
+          border: 2px solid var(--naranja);
+        "
+      >
+        Done✓
+      </button>
+      <button
+        type="button"
+        class="btn btn-danger"
+        style="
+          background-color: var(--violeta);
+          border: 2px solid var(--violeta);
+        "
+      >
+        Delete✘
+      </button>
 
-      {% if task.important == False %} 
+      <a
+        href="{% url 'taskdetail' task.id %}"
+        type="button"
+        class="btn btn-danger"
+        style="
+          background-color: var(--violeta);
+          border: 2px solid var(--violeta);
+        "
+      >
+        Details
+    </a>
+
+      {% if task.important == False %}
       <i class="fa-regular fa-star"></i>
       {% else %}
       <i class="fa-solid fa-star"></i>
-        {% endif %}
-
+      {% endif %}
     </div>
   </div>
 

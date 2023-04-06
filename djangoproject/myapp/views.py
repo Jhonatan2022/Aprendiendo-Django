@@ -38,9 +38,14 @@ from django.db import IntegrityError
 def index(request):
 
     tittle = "Welcome to my first Django project"
+
+    # Creamos una variable para almacenar le nombre del usuario logueado
+    nameuser = (request.user)
+
     # Creamos un render que nos permita mostrar un template en la página principal de nuestra aplicación
     return render(request, "index.html", {
-        "titulo": tittle
+        "titulo": tittle,
+        "nameuser": nameuser
     })
 
 
@@ -149,11 +154,12 @@ def tasks(request):
     # Creamos una consulta para mostrarlos en la vista de los tamplates
     # Usamos el método all para obtener todos los datos de la tabla task
     # Creamos una consulta interna para que solo muestre las tareas del usuario actual
-    taks = task.objects.filter(user = request.user)# Pra filtrar las tareas no completadas completed__isnull=True
+    # Pra filtrar las tareas no completadas completed__isnull=True
+    tarea = task.objects.filter(user=request.user)
 
     # Imprimimos el id de la tarea que coincida con el id que le pasamos por parámetro
     return render(request, 'tasks/tasks.html', {
-        'tasks': taks
+        'tasks': tarea
     })
 
 
@@ -184,7 +190,7 @@ def create_task(request):
 
             # Redireccionamos a la ruta tasks
             return redirect('tasks')
-        
+
         # En caso de que se genere un error, nos redirecciona a la ruta create_task
         except ValueError:
             # Renderizamos el formulario de registro en caso de que el usuario no envie un formulario
@@ -192,7 +198,51 @@ def create_task(request):
                 'form': Createtask(),
                 'error': 'No se ha podido crear la tarea :('
             })
-            
+
+
+# Creamos una vista para que el usuario pueda ver los detalles de una tarea
+def task_detail(request, id):
+
+    # Utilizamos el taskform para que el usuario pueda editar los datos de la tarea
+    if request.method == 'GET':
+
+        # Usamos el método get para obtener los datos de la tarea que coincida con el id que le pasamos por parámetro
+        # Creamos una consulta interna para que solo muestre las tareas del usuario actual
+        tarea = get_object_or_404(task, pk=id)
+
+        # Insertamos los datos de la tarea en el formulario
+        form = Createtask(instance=tarea)
+
+        # Renderizamos el formulario con los datos de la tarea
+        return render(request, 'tasks/task_detail.html', {
+
+            # Creamos un formulario de actualización de datos
+            'task': tarea,
+            'form': form
+        })
+    else:
+        try:
+
+            tarea = get_object_or_404(task, pk=id)
+
+            # Creamos una variable que nos permita almacenar los datos que nos envia el usuario
+            form = Createtask(request.POST, instance=tarea)
+
+            # Guardamos los datos en la base de datos
+            form.save()
+
+            # Redireccionamos a la ruta tasks
+            return redirect('tasks')
+
+        # En caso de que se genere un error, nos redirecciona a la ruta create_task
+        except ValueError:
+            # Renderizamos el formulario de registro en caso de que el usuario no envie un formulario
+            return render(request, 'tasks/task_detail.html', {
+                'task': tarea,
+                'form': form,
+                'error': 'No se ha podido editar la tarea :('
+            })
+
 
 # Creamos una vista que nos permita mostrar los proyectos que tenemos en nuestra base de datos
 def projects(request):

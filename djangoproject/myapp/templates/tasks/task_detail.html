@@ -6,23 +6,22 @@
 
 <title>Administración de tareas</title>
 
-<h1 align="center">Create new task</h1>
+<h1 align="center">Details or task: {{ task.tittle }}</h1>
 
 <!--Mostramos la variable en caso de que se generé un error-->
 <p>{{ error }}</p>
 
 <!--Creamos un botón para enviar el formulario-->
-<form action="{% url 'createtask' %}" method="post">
-  <!--Llamamos la variable que creamos-->
-
+<form action="{% url 'tasks' %}" method="POST">
   <!--Insertamos la variable -->
   {% csrf_token %}
 
   <div class="row g-3 align-items-center" style="justify-content: center">
     <div class="col-auto">
       {{ form.as_p}}
-      <button type="submit" class="btn btn-success mb-4">Create</button>
+      <button class="btn btn-success mb-4">Save</button>
     </div>
   </div>
 </form>
+
 {% endblock %}

@@ -38,10 +38,14 @@
   <body>
     <!--Creamos un menú-->
 
-    <nav class="navbar navbar-dark mb-5" 
-    style="background-color: var(--morado);
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;">
+    <nav
+      class="navbar navbar-dark mb-5"
+      style="
+        background-color: var(--morado);
+        border-bottom-left-radius: 15px;
+        border-bottom-right-radius: 15px;
+      "
+    >
       <div class="container-fluid">
         <a class="navbar-brand" href="{% url 'index' %}">
           <img
@@ -66,8 +70,7 @@
         </button>
         <div
           class="offcanvas offcanvas-end"
-          style="background-color: var(--morado);
-          color: var(--blanco);"
+          style="background-color: var(--morado); color: var(--blanco)"
           tabindex="-1"
           id="offcanvasDarkNavbar"
           aria-labelledby="offcanvasDarkNavbarLabel"
@@ -106,16 +109,6 @@
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'logout' %}">Logout</a>
               </li>
-              {% else %}
-              <!--En caso de que el usuario no este auntentcado-->
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'singup' %}">Singup</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'login' %}">Login</a>
-              </li>
-              {% endif %}
-
               <li class="nav-item dropdown">
                 <a
                   class="nav-link dropdown-toggle"
@@ -126,9 +119,13 @@
                 >
                   PROJECTS
                 </a>
-                <ul class="dropdown-menu"
-                style="background-color: var(--moradoclaro);
-                color: var(--blancox);">
+                <ul
+                  class="dropdown-menu"
+                  style="
+                    background-color: var(--moradoclaro);
+                    color: var(--blancox);
+                  "
+                >
                   <li>
                     <a class="dropdown-item" href="{% url 'projects' %}"
                       >All Projects</a
@@ -174,6 +171,16 @@
                   <li><a class="dropdown-item" href="#">Se</a></li>
                 </ul>
               </li>
+
+              {% else %}
+              <!--En caso de que el usuario no este auntentcado-->
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'singup' %}">Singup</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'login' %}">Login</a>
+              </li>
+              {% endif %}
             </ul>
             <form class="d-flex mt-3" role="search">
               <input
@@ -190,24 +197,34 @@
     </nav>
 
     <div class="informacion">
-    <main class="containe">
-
-      <!--Creamos un block de contenido para la información-->
-      {% block content %} {% endblock %}
-    </main></div>
-
-
+      <main class="containe">
+        <!--Creamos un block de contenido para la información-->
+        {% block content %} {% endblock %}
+      </main>
+    </div>
 
     <!-- Footer -->
-    <footer class="text-center text-lg-start" style="background-color: var(--morado);border-top-right-radius: 25px; border-top-left-radius: 25px; font-weight: 700; color: var(--blanco);">
+    <footer
+      class="text-center text-lg-start"
+      style="
+        background-color: var(--morado);
+        border-top-right-radius: 25px;
+        border-top-left-radius: 25px;
+        font-weight: 700;
+        color: var(--blanco);
+      "
+    >
       <!-- Section: Social media -->
       <section
-        class="p-2" style="background-color: rgba(0, 0, 0, 0.27); border-top-right-radius: 15px;
-        border-top-left-radius: 15px;
-        margin: auto;
-        width: 99.4%;"
-      >
-      </section>
+        class="p-2"
+        style="
+          background-color: rgba(0, 0, 0, 0.27);
+          border-top-right-radius: 15px;
+          border-top-left-radius: 15px;
+          margin: auto;
+          width: 99.4%;
+        "
+      ></section>
       <!-- Section: Social media -->
 
       <!-- Section: Links  -->
@@ -219,12 +236,10 @@
             <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
               <!-- Content -->
               <h6 class="text-uppercase fw-bold mb-4">
-                <i class="fas fa-gem" style="font-size: 20px;"></i>
+                <i class="fas fa-gem" style="font-size: 20px"></i>
                 Project With Django
               </h6>
-              <p>
-                
-              </p>
+              <p></p>
             </div>
             <!-- Grid column -->
 
@@ -234,16 +249,27 @@
               <h6 class="text-uppercase fw-bold mb-4">Useful links</h6>
               <p>
                 <a href="#!" class="text-reset">
-                  <i class="fa-solid fa-arrow-up-right-from-square me-2"></i>Pricing</a>
+                  <i class="fa-solid fa-arrow-up-right-from-square me-2"></i
+                  >Pricing</a
+                >
               </p>
               <p>
-                <a href="#!" class="text-reset"><i class="fa-solid fa-arrow-up-right-from-square me-2"></i>Settings</a>
+                <a href="#!" class="text-reset"
+                  ><i class="fa-solid fa-arrow-up-right-from-square me-2"></i
+                  >Settings</a
+                >
               </p>
               <p>
-                <a href="#!" class="text-reset"><i class="fa-solid fa-arrow-up-right-from-square me-2"></i>Orders</a>
+                <a href="#!" class="text-reset"
+                  ><i class="fa-solid fa-arrow-up-right-from-square me-2"></i
+                  >Orders</a
+                >
               </p>
               <p>
-                <a href="#!" class="text-reset"><i class="fa-solid fa-arrow-up-right-from-square me-2"></i>Help</a>
+                <a href="#!" class="text-reset"
+                  ><i class="fa-solid fa-arrow-up-right-from-square me-2"></i
+                  >Help</a
+                >
               </p>
             </div>
             <!-- Grid column -->
