@@ -11,10 +11,8 @@ from django.http import HttpResponse, JsonResponse
 from .models import Proyecto, task  # Importamos el modelo Proyecto y task
 
 # Importamos la función get_list_or_404 para poder crear una vista de error 404
-from django.shortcuts import get_object_or_404, get_list_or_404
-
 # Importamos render para renderizar un template y redirect para redireccionar a una ruta
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, get_list_or_404, render, redirect
 
 # Importamos el formulario que hemos creado en forms.py
 # Importamos el formulario Createtask y createproject
@@ -31,6 +29,9 @@ from django.contrib.auth import login, logout, authenticate
 
 # Importamos un modelo para validar errores especificos
 from django.db import IntegrityError
+
+# Importamos un modelo para crear una fecha de comienzo y finalización
+from django.utils import timezone
 
 
 # Create your views here.
@@ -155,13 +156,27 @@ def tasks(request):
     # Usamos el método all para obtener todos los datos de la tabla task
     # Creamos una consulta interna para que solo muestre las tareas del usuario actual
     # Pra filtrar las tareas no completadas completed__isnull=True
-    tarea = task.objects.filter(user=request.user)
+    tarea = task.objects.filter(user=request.user, datecompleted__isnull=True)
 
     # Imprimimos el id de la tarea que coincida con el id que le pasamos por parámetro
     return render(request, 'tasks/tasks.html', {
         'tasks': tarea
     })
 
+
+# Creamos una vista para las tareas que estan completadas
+def completed_tasks(request):
+    
+        # Creamos una consulta para mostrarlos en la vista de los tamplates
+        # Usamos el método all para obtener todos los datos de la tabla task
+        # Creamos una consulta interna para que solo muestre las tareas del usuario actual
+        # Pra filtrar las tareas completadas completed__isnull=False
+        tarea = task.objects.filter(user=request.user, datecompleted__isnull=False).order_by('-datecompleted') # Usamos el método order_by para ordenar los datos de la tabla task
+    
+        # Imprimimos el id de la tarea que coincida con el id que le pasamos por parámetro
+        return render(request, 'tasks/completed_tasks.html', {
+            'tasks': tarea
+        })
 
 # Creamos una vista para que el usuario pueda crear una nueva tarea
 def create_task(request):
@@ -201,14 +216,14 @@ def create_task(request):
 
 
 # Creamos una vista para que el usuario pueda ver los detalles de una tarea
-def task_detail(request, id):
+def task_detail(request, task_id):
 
     # Utilizamos el taskform para que el usuario pueda editar los datos de la tarea
     if request.method == 'GET':
 
         # Usamos el método get para obtener los datos de la tarea que coincida con el id que le pasamos por parámetro
         # Creamos una consulta interna para que solo muestre las tareas del usuario actual
-        tarea = get_object_or_404(task, pk=id)
+        tarea = get_object_or_404(task, pk=task_id, user=request.user)
 
         # Insertamos los datos de la tarea en el formulario
         form = Createtask(instance=tarea)
@@ -222,8 +237,7 @@ def task_detail(request, id):
         })
     else:
         try:
-
-            tarea = get_object_or_404(task, pk=id)
+            tarea = get_object_or_404(task, pk=task_id, user=request.user)
 
             # Creamos una variable que nos permita almacenar los datos que nos envia el usuario
             form = Createtask(request.POST, instance=tarea)
@@ -242,6 +256,42 @@ def task_detail(request, id):
                 'form': form,
                 'error': 'No se ha podido editar la tarea :('
             })
+
+
+# Creamos una vista para que el usuario pueda marcar como completada una tarea
+def complete_task(request, task_id):
+
+    # Creamos una variable que nos permita almacenar los datos que nos envia el usuario
+    tarea = get_object_or_404(task, pk=task_id, user=request.user)
+
+    # Creamos una condicional para validar si es por metodo GET o POST
+    if request.method == 'POST':
+
+        # Creamos el nuevo dato que vamos a guardar en la base de datos
+        tarea.datecompleted = timezone.now()
+        tarea.done = True
+
+        # Guardamos los datos en la base de datos
+        tarea.save()
+
+        # Redireccionamos a la ruta tasks
+        return redirect('tasks')
+
+
+# Creamos una vista para que el usuario pueda eliminar una tarea
+def delete_task(request, task_id):
+
+    # Creamos una variable que nos permita almacenar los datos que nos envia el usuario
+    tarea = get_object_or_404(task, pk=task_id, user=request.user)
+
+    # Creamos una condicional para validar si es por metodo GET o POST
+    if request.method == 'POST':
+
+        # Eliminamos los datos de la base de datos
+        tarea.delete()
+
+        # Redireccionamos a la ruta tasks
+        return redirect('tasks')
 
 
 # Creamos una vista que nos permita mostrar los proyectos que tenemos en nuestra base de datos

@@ -25,7 +25,8 @@
     <div class="card-header">
       <b>By:</b> {{ task.user.username }}
       <div style="text-align: right; margin-top: -1.6em">
-        {% if task.done == False %} ⌛ {% else %} ✅ {% endif %}
+        {% if task.done == False %} ⌛ {% else %} ✅ {% endif %} 
+        {% if task.important == False %}<i class="fa-regular fa-star"></i>{% else %}<i class="fa-solid fa-star" ></i>{% endif %}
       </div>
     </div>
     <div class="card-body">
@@ -33,45 +34,54 @@
       <p class="card-text">{{ task.description }}</p>
     </div>
     <div class="card-footer">Created: {{ task.created }}</div>
-    <div class="card-footer" style="padding: 10px;">
-      <button
-        type="button"
-        class="btn btn-success"
-        style="
-          background-color: var(--naranja);
-          border: 2px solid var(--naranja);
-        "
+
+    {% if task.datecompleted == None %}
+    <div class="card-footer">Completed: Not completed yet</div>
+    {% else %}
+    <div class="card-footer">Completed: {{ task.datecompleted }}</div>
+    {% endif %}
+    <div class="card-footer" style="padding: 10px">
+      <form
+        class="btn"
+        action="{% url 'complete_task' task.id %}"
+        method="post"
       >
-        Done✓
-      </button>
-      <button
-        type="button"
-        class="btn btn-danger"
-        style="
-          background-color: var(--violeta);
-          border: 2px solid var(--violeta);
-        "
-      >
-        Delete✘
-      </button>
+        {% csrf_token %}
+        <button
+          class="btn"
+          style="
+            background-color: var(--naranja);
+            border: 2px solid var(--naranja);
+          "
+        >
+          Done✓
+        </button>
+      </form>
+
+      <form class="btn" action="{% url 'delete_task' task.id %}" method="post">
+        {% csrf_token %}
+        <button
+          class="btn btn-danger"
+          style="
+            background-color: var(--violeta);
+            border: 2px solid var(--violeta);
+          "
+        >
+          Delete✘
+        </button>
+      </form>
 
       <a
         href="{% url 'taskdetail' task.id %}"
         type="button"
         class="btn btn-danger"
         style="
-          background-color: var(--violeta);
-          border: 2px solid var(--violeta);
+          background-color: var(--naranja);
+          border: 2px solid var(--naranja);
         "
       >
         Details
-    </a>
-
-      {% if task.important == False %}
-      <i class="fa-regular fa-star"></i>
-      {% else %}
-      <i class="fa-solid fa-star"></i>
-      {% endif %}
+      </a>
     </div>
   </div>
 

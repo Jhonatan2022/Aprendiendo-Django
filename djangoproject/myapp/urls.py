@@ -56,11 +56,26 @@ urlpatterns = [
     # Creamos una ruta en donde el usuario podra crear una nueva tarea
     # Para entrar a esta ruta, debemos escribir: /newtask/
     # Asignamos nombre a la ruta
-    path('create_task/', views.create_task, name="createtask"),
+    path('tasks/create_task/', views.create_task, name="createtask"),
 
     # Creamos una ruda donde el usuario podra ver los detalles de una tarea
     # Para entrar a esta ruta, debemos escribir: /task/id
     # Asignamos nombre a la ruta
-    path('task/<int:id>', views.task_detail, name="taskdetail"),
+    path('tasks/<int:task_id>/', views.task_detail, name="taskdetail"),
+
+    # Creamos una ruta donde el usuario marque una tarea como completada
+    # Para entrar a esta ruta, debemos escribir: /task/complete/id
+    # Asignamos nombre a la ruta
+    path('tasks/<int:task_id>/complete', views.complete_task, name="complete_task"),
+
+    # Creamos una ruta donde el usuario pueda eliminar una tarea
+    # Para entrar a esta ruta, debemos escribir: /task/delete/id
+    # Asignamos nombre a la ruta
+    path('tasks/<int:task_id>/delete', views.delete_task, name="delete_task"),
+
+    # Creamos una ruta para las tareas completadas
+    # Para entrar a esta ruta, debemos escribir: /tasks/completed/
+    # Asignamos nombre a la ruta
+    path('tasks/completed/', views.completed_tasks, name="completed_tasks"),
 
 ]

@@ -12,16 +12,27 @@
 <p>{{ error }}</p>
 
 <!--Creamos un botón para enviar el formulario-->
-<form action="{% url 'tasks' %}" method="POST">
+<form method="post">
   <!--Insertamos la variable -->
   {% csrf_token %}
 
   <div class="row g-3 align-items-center" style="justify-content: center">
     <div class="col-auto">
-      {{ form.as_p}}
+      {{ form.as_p }}
       <button class="btn btn-success mb-4">Save</button>
     </div>
   </div>
 </form>
+
+<!--
+<form action="{% url 'complete_task' task.id %}" method="post">
+  {% csrf_token %}
+  <button
+    class="btn btn-success"
+    style="background-color: var(--naranja); border: 2px solid var(--naranja)"
+  >
+    Done✓
+  </button>
+</form>-->
 
 {% endblock %}
