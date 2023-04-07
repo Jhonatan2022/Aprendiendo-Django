@@ -38,7 +38,7 @@ from django.utils import timezone
 # Crearemos una vista que para mostrar un mensaje en la página principal
 def index(request):
 
-    tittle = "Welcome to my first Django project"
+    tittle = "!HI Welcome 👋"
 
     # Creamos una variable para almacenar le nombre del usuario logueado
     nameuser = (request.user)
@@ -166,19 +166,22 @@ def tasks(request):
 
 # Creamos una vista para las tareas que estan completadas
 def completed_tasks(request):
-    
-        # Creamos una consulta para mostrarlos en la vista de los tamplates
-        # Usamos el método all para obtener todos los datos de la tabla task
-        # Creamos una consulta interna para que solo muestre las tareas del usuario actual
-        # Pra filtrar las tareas completadas completed__isnull=False
-        tarea = task.objects.filter(user=request.user, datecompleted__isnull=False).order_by('-datecompleted') # Usamos el método order_by para ordenar los datos de la tabla task
-    
-        # Imprimimos el id de la tarea que coincida con el id que le pasamos por parámetro
-        return render(request, 'tasks/tasks.html', {
-            'tasks': tarea
-        })
+
+    # Creamos una consulta para mostrarlos en la vista de los tamplates
+    # Usamos el método all para obtener todos los datos de la tabla task
+    # Creamos una consulta interna para que solo muestre las tareas del usuario actual
+    # Pra filtrar las tareas completadas completed__isnull=False
+    tarea = task.objects.filter(user=request.user, datecompleted__isnull=False).order_by(
+        '-datecompleted')  # Usamos el método order_by para ordenar los datos de la tabla task
+
+    # Imprimimos el id de la tarea que coincida con el id que le pasamos por parámetro
+    return render(request, 'tasks/tasks.html', {
+        'tasks': tarea
+    })
 
 # Creamos una vista para que el usuario pueda crear una nueva tarea
+
+
 def create_task(request):
 
     # Creamos una condicional para que si el usuario envia un formulario, nos guarde los datos en la base de datos.
@@ -330,7 +333,7 @@ def create_project(request):
 
             # Creamos una variable que nos permita almacenar los datos que nos envia el usuario
             new_project = new_project.save(commit=False)
-            
+
             # Asignamos el proyecto al usuario actual
             new_project.user = request.user
 
@@ -339,7 +342,7 @@ def create_project(request):
 
             # Redireccionamos a la ruta projects
             return redirect('projects')
-        
+
         # En caso de que se genere un error, nos redirecciona a la ruta create_project
         except ValueError:
 
@@ -350,8 +353,25 @@ def create_project(request):
             })
 
 
+# Creamos una vista para que el usuario pueda eliminar un proyecto
+def delete_project(request, pro_id):
+
+    # Creamos una variable que nos permita almacenar los datos que nos envia el usuario
+    project = get_object_or_404(Proyecto, pk=pro_id, user=request.user)
+
+    # Creamos una condicional para validar si es por metodo GET o POST
+    if request.method == 'POST':
+
+        # Eliminamos los datos de la base de datos
+        project.delete()
+
+        # Redireccionamos a la ruta projects
+        return redirect('projects')
+
+
 # Creamos una vista unica para mostrar los datos de un projecto
 def project_detail(request, id):
+
     # Creamos una consulta para mostrarlos en la vista de los tamplates
     # Usamos el método all para obtener todos los datos de la tabla Proyecto
 

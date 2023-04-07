@@ -43,6 +43,11 @@ urlpatterns = [
     path('projects/', views.projects, name="projects"),
 
 
+    # Creamos una ruta donde el usuario podra eliminar un proyecto
+    # Para entrar a esta ruta, debemos escribir: /delete_project/id
+    path('projects/<int:pro_id>/delete', views.delete_project, name="delete_project"),
+
+
     # Creamos una ruta donde el usuario pofrá ver los detalles del un proyecto
     path('projects/<int:id>', views.project_detail,
          name="projectdetail"),  # Asignamos nombre a la ruta
@@ -66,7 +71,8 @@ urlpatterns = [
     # Creamos una ruta donde el usuario marque una tarea como completada
     # Para entrar a esta ruta, debemos escribir: /task/complete/id
     # Asignamos nombre a la ruta
-    path('tasks/<int:task_id>/complete', views.complete_task, name="complete_task"),
+    path('tasks/<int:task_id>/complete',
+         views.complete_task, name="complete_task"),
 
     # Creamos una ruta donde el usuario pueda eliminar una tarea
     # Para entrar a esta ruta, debemos escribir: /task/delete/id

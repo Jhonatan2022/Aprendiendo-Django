@@ -25,8 +25,11 @@
     <div class="card-header">
       <b>By:</b> {{ task.user.username }}
       <div style="text-align: right; margin-top: -1.6em">
-        {% if task.done == False %} ⌛ {% else %} ✅ {% endif %} 
-        {% if task.important == False %}<i class="fa-regular fa-star"></i>{% else %}<i class="fa-solid fa-star" ></i>{% endif %}
+        {% if task.done == False %} ⌛ {% else %} ✅ {% endif %} {% if
+        task.important == False %}<i class="fa-regular fa-star"></i>{% else %}<i
+          class="fa-solid fa-star"
+        ></i
+        >{% endif %}
       </div>
     </div>
     <div class="card-body">
