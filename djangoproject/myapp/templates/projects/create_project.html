@@ -9,24 +9,24 @@
 
 <title>Create projects</title>
 
-<h1 align="center">Welcome Create a new project</h1>
+<main class="container">
+  <div class="row">
+    <div class="col-md-4 offset-md-4">
+      <form method="post" class="card card-body mb-4 mt-3">
+        <h1 class="text-center">Create new project</h1>
+        {% csrf_token %} {{ error }}
 
-<!--Insertamos la variable -->
-{% csrf_token %}
+        <div class="mb-3">
+          <label for="name">Name of project:</label>
+          <input type="text" name="name" id="name" class="form-control" placeholder="Write name of project" />
+        </div>
 
-<!--Creamos el formulario-->
-<form method="POST">
-  <!--Insertamos la variable -->
-  {% csrf_token %}
-
-  <div class="row g-3 align-items-center" style="justify-content: center">
-    <div class="col-auto">
-      {{ form}}
-      <button type="submit" class="btn btn-success mt-3 mb-4">
-        Create Project <img src="{% static 'logo3.webp' %}" alt="" width="20" />
-      </button>
+        <button class="btn btn-dark mb-3">
+          Create<img src="{% static 'logo3.webp' %}" alt="" width="20" />
+        </button>
+      </form>
     </div>
   </div>
-</form>
+</main>
 
 {% endblock %}

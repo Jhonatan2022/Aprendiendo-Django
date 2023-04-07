@@ -136,6 +136,9 @@ USE_TZ = True
 # Este apartado determinara la ruta de los archivos estáticos
 STATIC_URL = 'static/'
 
+# Creamos la ruta para que redirija al usuario a login
+LOGIN_URL = '/login'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 

@@ -6,21 +6,34 @@
 
 <title>Singup</title>
 
-<div class="row g-3 align-items-center" style="justify-content: center">
-  <!--llamamos la bariable que creamos como titulo-->
-  <h1>{{ titulo }}</h1>
+<main class="container">
+  <div class="row">
+    <div class="col-md-4 offset-md-4">
+      <form action="{% url 'singup' %}" method="post" class="card card-body mb-4 mt-3">
+        <h1 class="text-center">Singup</h1>
+        {% csrf_token %} {{ error }}
 
-  <p>{{ error }}</p>
+        <div class="mb-3">
+          <label for="username">Username:</label>
+          <input type="text" name="username" id="username" class="form-control" placeholder="Write your user name" />
+        </div>
 
-  <form
-    method="post"
-    action="{% url 'singup' %}"
-    style="justify-content: center"
-  >
-    <!--Creamos el token del formulario-->
-    {% csrf_token %} {{ form.as_p }}
-    <button>singup</button>
-  </form>
-</div>
+        <div class="mb-3">
+          <label for="Password1">Password:</label>
+          <input type="password" name="password1" id="password1" class="form-control"
+            placeholder="Write your password" />
+        </div>
+
+        <div class="mb-3">
+          <label for="Password2">Comfirm your password:</label>
+          <input type="password" name="password2" id="password2" class="form-control"
+            placeholder="Comfirm your password" />
+        </div>
+
+        <button class="btn btn-dark mb-3">Singup</button>
+      </form>
+    </div>
+  </div>
+</main>
 
 {% endblock %}

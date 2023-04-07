@@ -33,6 +33,9 @@ from django.db import IntegrityError
 # Importamos un modelo para crear una fecha de comienzo y finalización
 from django.utils import timezone
 
+# Importamos login_required para que el usuario tenga que iniciar sesión para poder acceder a las rutas
+from django.contrib.auth.decorators import login_required
+
 
 # Create your views here.
 # Crearemos una vista que para mostrar un mensaje en la página principal
@@ -103,6 +106,7 @@ def singup(request):
 
 
 # Creamos una función para que el usuario pueda cerrar sesión
+@login_required
 def singout(request):
 
     # Cerramos la sesión del usuario
@@ -145,6 +149,7 @@ def login_user(request):
 
 
 # Creamos una vista que nos permita mostrar las tareas que tenemos en nuestra base de datos
+@login_required
 def tasks(request):
 
     # Creamos una variable que nos permita e almacenamos los datos en una lista de diccionarios
@@ -165,6 +170,7 @@ def tasks(request):
 
 
 # Creamos una vista para las tareas que estan completadas
+@login_required
 def completed_tasks(request):
 
     # Creamos una consulta para mostrarlos en la vista de los tamplates
@@ -181,13 +187,18 @@ def completed_tasks(request):
 
 
 # Creamos una vista para que el usuario pueda crear una nueva tarea
+@login_required
 def create_task(request):
 
     # Creamos una condicional para que si el usuario envia un formulario, nos guarde los datos en la base de datos.
     if request.method == 'GET':
 
+        # Obtenemos todos los proyectos que pertenezcan al usuario actual
+        project = Proyecto.objects.filter(user=request.user)  
+
         return render(request, 'tasks/create_task.html', {
-            'form': Createtask()
+            'form': Createtask(),
+            'projects': project
         })
     # Creamos una condicional para que si el usuario envia un formulario, nos guarde los datos en la base de datos.
     else:
@@ -197,6 +208,9 @@ def create_task(request):
             # Creamos una variable que nos permita almacenar los datos que nos envia el usuario
             form = Createtask(request.POST)
             # Creamos una condicional para validar si el formulario es válido
+
+            # Obtenemos todos los proyectos que pertenezcan al usuario actual
+            project = Proyecto.objects.filter(user=request.user)
 
             # Creamos una variable que nos permita almacenar los datos que nos envia el usuario
             new_task = form.save(commit=False)
@@ -214,11 +228,13 @@ def create_task(request):
             # Renderizamos el formulario de registro en caso de que el usuario no envie un formulario
             return render(request, 'tasks/create_task.html', {
                 'form': Createtask(),
+                'projects': project,
                 'error': 'No se ha podido crear la tarea :('
             })
 
 
 # Creamos una vista para que el usuario pueda ver los detalles de una tarea
+@login_required
 def task_detail(request, task_id):
 
     # Utilizamos el taskform para que el usuario pueda editar los datos de la tarea
@@ -264,6 +280,7 @@ def task_detail(request, task_id):
 
 
 # Creamos una vista para que el usuario pueda marcar como completada una tarea
+@login_required
 def complete_task(request, task_id):
 
     # Creamos una variable que nos permita almacenar los datos que nos envia el usuario
@@ -284,6 +301,7 @@ def complete_task(request, task_id):
 
 
 # Creamos una vista para que el usuario pueda eliminar una tarea
+@login_required
 def delete_task(request, task_id):
 
     # Creamos una variable que nos permita almacenar los datos que nos envia el usuario
@@ -300,6 +318,7 @@ def delete_task(request, task_id):
 
 
 # Creamos una vista que nos permita mostrar los proyectos que tenemos en nuestra base de datos
+@login_required
 def projects(request):
 
     # Creamos una variable que nos permita e almacenamos los datos en una lista de diccionarios
@@ -316,6 +335,7 @@ def projects(request):
 
 
 # Creamos una vista para que el usuario pueda crear un nuevo proyecto
+@login_required
 def create_project(request):
 
     # Creamos una condicional para que si el usuario envia un formulario, nos guarde los datos en la base de datos.
@@ -355,6 +375,7 @@ def create_project(request):
 
 
 # Creamos una vista para que el usuario pueda eliminar un proyecto
+@login_required
 def delete_project(request, pro_id):
 
     # Creamos una variable que nos permita almacenar los datos que nos envia el usuario
@@ -371,6 +392,7 @@ def delete_project(request, pro_id):
 
 
 # Creamos una vista unica para mostrar los datos de un projecto
+@login_required
 def project_detail(request, id):
 
     # Utilizamos el createproject para que nos muestre los datos del proyecto y los pueda editar

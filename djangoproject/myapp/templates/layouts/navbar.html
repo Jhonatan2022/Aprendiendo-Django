@@ -3,353 +3,241 @@
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!--Llamamos el favicon-->
-    <link
-      rel="shortcut icon"
-      type="image/png"
-      href="{% static 'logo3.webp' %}"
-    />
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!--Llamamos el css-->
-    <link rel="stylesheet" href="{% static '/styles/main.css' %}" />
+  <!--Llamamos el favicon-->
+  <link rel="shortcut icon" type="image/png" href="{% static 'logo3.webp' %}" />
 
-    <!--Llamamos el css de bootstrap-->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
-      crossorigin="anonymous"
-    />
+  <!--Llamamos el css-->
+  <link rel="stylesheet" href="{% static '/styles/main.css' %}" />
 
-    <!--Llamamos el generador de sweet alert-->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <!--Llamamos el css de bootstrap-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous" />
 
-    <!--Llamamos el fonts awesome-->
-    <script
-      src="https://kit.fontawesome.com/f21459c29e.js"
-      crossorigin="anonymous"
-    ></script>
-  </head>
-  <body>
-    <!--Creamos un menú-->
+  <!--Llamamos el generador de sweet alert-->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <nav
-      class="navbar navbar-dark"
-      style="
+  <!--Llamamos el fonts awesome-->
+  <script src="https://kit.fontawesome.com/f21459c29e.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <!--Creamos un menú-->
+
+  <nav class="navbar navbar-dark" style="
         margin-bottom: 7em;
         background-color: var(--morado);
         border-bottom-left-radius: 15px;
         border-bottom-right-radius: 15px;
-      "
-    >
-      <div class="container-fluid">
-        <a class="navbar-brand" href="{% url 'index' %}">
-          <img
-            class="image"
-            src="{% static 'logo3.webp' %}"
-            alt=""
-            width="50"
-            height="50"
-            class="d-inline-block align-text-top"
-          />
-          Project Django</a
-        >
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="offcanvas"
-          data-bs-target="#offcanvasDarkNavbar"
-          aria-controls="offcanvasDarkNavbar"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div
-          class="offcanvas offcanvas-end"
-          style="background-color: var(--morado); color: var(--blanco)"
-          tabindex="-1"
-          id="offcanvasDarkNavbar"
-          aria-labelledby="offcanvasDarkNavbarLabel"
-        >
-          <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">
-              <img
-                class="image"
-                src="{% static 'logo3.webp' %}"
-                alt=""
-                width="50"
-                height="40"
-                class="d-inline-block align-text-top"
-              />
-              Project Django
-            </h5>
-            <button
-              type="button"
-              class="btn-close btn-close-white"
-              data-bs-dismiss="offcanvas"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="offcanvas-body">
-            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-              <li class="nav-item">
-                <a
-                  class="nav-link active"
-                  aria-current="page"
-                  href="{% url 'index' %}"
-                  >HOME</a
-                >
-              </li>
-              <!--Creamos una condicional para validad cuando el usuario esta logueado-->
-              {% if user.is_authenticated %}
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a
-                  class="nav-link dropdown-toggle"
-                  href="#"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  PROJECTS
-                </a>
-                <ul
-                  class="dropdown-menu"
-                  style="
+      ">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{% url 'index' %}">
+        <img class="image" src="{% static 'logo3.webp' %}" alt="" width="50" height="50"
+          class="d-inline-block align-text-top" />
+        Project Django</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar"
+        aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="offcanvas offcanvas-end" style="background-color: var(--morado); color: var(--blanco)" tabindex="-1"
+        id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">
+            <img class="image" src="{% static 'logo3.webp' %}" alt="" width="50" height="40"
+              class="d-inline-block align-text-top" />
+            Project Django
+          </h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+            aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="{% url 'index' %}">HOME</a>
+            </li>
+            <!--Creamos una condicional para validad cuando el usuario esta logueado-->
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                PROJECTS
+              </a>
+              <ul class="dropdown-menu" style="
                     background-color: var(--moradoclaro);
                     color: var(--blancox);
-                  "
-                >
-                  <li>
-                    <a class="dropdown-item" href="{% url 'projects' %}"
-                      >All Projects</a
-                    >
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="{% url 'createproject' %}"
-                      >Create New Project</a
-                    >
-                  </li>
-                  <li>
-                    <hr class="dropdown-divider" />
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="#">ddd</a>
-                  </li>
-                </ul>
-              </li>
-              <li class="nav-item dropdown">
-                <a
-                  class="nav-link dropdown-toggle"
-                  href="#"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  TASKS
-                </a>
-                <ul class="dropdown-menu dropdown-menu-dark">
-                  <li>
-                    <a class="dropdown-item" href="{% url 'tasks' %}"
-                      >Tasks Pending</a
-                    >
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="{% url 'createtask' %}"
-                      >Create Tasks</a
-                    >
-                  </li>
-                  <li>
-                    <hr class="dropdown-divider" />
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="{% url 'completed_tasks' %}"
-                      >Tasks Completed</a
-                    >
-                  </li>
-                </ul>
-              </li>
+                  ">
+                <li>
+                  <a class="dropdown-item" href="{% url 'projects' %}">All Projects</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="{% url 'createproject' %}">Create New Project</a>
+                </li>
+                <li>
+                  <hr class="dropdown-divider" />
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#">ddd</a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                TASKS
+              </a>
+              <ul class="dropdown-menu dropdown-menu-dark">
+                <li>
+                  <a class="dropdown-item" href="{% url 'tasks' %}">Tasks Pending</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="{% url 'createtask' %}">Create Tasks</a>
+                </li>
+                <li>
+                  <hr class="dropdown-divider" />
+                </li>
+                <li>
+                  <a class="dropdown-item" href="{% url 'completed_tasks' %}">Tasks Completed</a>
+                </li>
+              </ul>
+            </li>
 
-              {% else %}
-              <!--En caso de que el usuario no este auntentcado-->
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'singup' %}">Singup</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'login' %}">Login</a>
-              </li>
-              {% endif %}
-            </ul>
-            <form class="d-flex mt-3" role="search">
-              <input
-                class="form-control me-2"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-              />
-              <button class="btn btn-success" type="submit">Search</button>
-            </form>
-          </div>
+            {% else %}
+            <!--En caso de que el usuario no este auntentcado-->
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'singup' %}">Singup</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'login' %}">Login</a>
+            </li>
+            {% endif %}
+          </ul>
+          <form class="d-flex mt-3" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+            <button class="btn btn-success" type="submit">Search</button>
+          </form>
         </div>
       </div>
-    </nav>
-
-    <div class="informacion">
-      <main class="containe">
-        <!--Creamos un block de contenido para la información-->
-        {% block content %} {% endblock %}
-      </main>
     </div>
+  </nav>
 
-    <!-- Footer -->
-    <footer
-      class="text-center text-lg-start"
-      style="
+  <div class="informacion">
+    <main class="containe">
+      <!--Creamos un block de contenido para la información-->
+      {% block content %} {% endblock %}
+    </main>
+  </div>
+
+  <!-- Footer -->
+  <footer class="text-center text-lg-start" style="
         background-color: var(--morado);
         border-top-right-radius: 25px;
         border-top-left-radius: 25px;
         font-weight: 700;
         color: var(--blanco);
-      "
-    >
-      <!-- Section: Social media -->
-      <section
-        class="p-2"
-        style="
+      ">
+    <!-- Section: Social media -->
+    <section class="p-2" style="
           background-color: rgba(0, 0, 0, 0.27);
           border-top-right-radius: 15px;
           border-top-left-radius: 15px;
           margin: auto;
           width: 99.4%;
-        "
-      ></section>
-      <!-- Section: Social media -->
+        "></section>
+    <!-- Section: Social media -->
 
-      <!-- Section: Links  -->
-      <section class="">
-        <div class="container text-center text-md-start mt-5">
-          <!-- Grid row -->
-          <div class="row mt-3">
-            <!-- Grid column -->
-            <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-              <!-- Content -->
-              <h6 class="text-uppercase fw-bold mb-4">
-                <i class="fas fa-gem" style="font-size: 20px"></i>
-                Project With Django
-              </h6>
-              <p></p>
-            </div>
-            <!-- Grid column -->
-
-            <!-- Grid column -->
-            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-              <!-- Links -->
-              <h6 class="text-uppercase fw-bold mb-4">Useful links</h6>
-              <p>
-                <a href="#!" class="text-reset">
-                  <i class="fa-solid fa-arrow-up-right-from-square me-2"></i
-                  >Pricing</a
-                >
-              </p>
-              <p>
-                <a href="#!" class="text-reset"
-                  ><i class="fa-solid fa-arrow-up-right-from-square me-2"></i
-                  >Settings</a
-                >
-              </p>
-              <p>
-                <a href="#!" class="text-reset"
-                  ><i class="fa-solid fa-arrow-up-right-from-square me-2"></i
-                  >Orders</a
-                >
-              </p>
-            </div>
-            <!-- Grid column -->
-
-            <!-- Grid column -->
-            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-              <!-- Links -->
-              <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
-              <p>
-                <i class="fas fa-envelope me-3"></i>
-                info@example.com
-              </p>
-              <p><i class="fas fa-phone me-3"></i> + 01 234 567 88</p>
-              <p><i class="fas fa-print me-3"></i> + 01 234 567 89</p>
-            </div>
-            <!-- Grid column -->
+    <!-- Section: Links  -->
+    <section class="">
+      <div class="container text-center text-md-start mt-5">
+        <!-- Grid row -->
+        <div class="row mt-3">
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+            <!-- Content -->
+            <h6 class="text-uppercase fw-bold mb-4">
+              <i class="fas fa-gem" style="font-size: 20px"></i>
+              Project With Django
+            </h6>
+            <p></p>
           </div>
-          <!-- Grid row -->
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold mb-4">Useful links</h6>
+            <p>
+              <a href="#!" class="text-reset">
+                <i class="fa-solid fa-arrow-up-right-from-square me-2"></i>Pricing</a>
+            </p>
+            <p>
+              <a href="#!" class="text-reset"><i class="fa-solid fa-arrow-up-right-from-square me-2"></i>Settings</a>
+            </p>
+            <p>
+              <a href="#!" class="text-reset"><i class="fa-solid fa-arrow-up-right-from-square me-2"></i>Orders</a>
+            </p>
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+            <p>
+              <i class="fas fa-envelope me-3"></i>
+              info@example.com
+            </p>
+            <p><i class="fas fa-phone me-3"></i> + 01 234 567 88</p>
+            <p><i class="fas fa-print me-3"></i> + 01 234 567 89</p>
+          </div>
+          <!-- Grid column -->
         </div>
-      </section>
-      <!-- Section: Links  -->
+        <!-- Grid row -->
+      </div>
+    </section>
+    <!-- Section: Links  -->
 
-      <!-- Section: Social media -->
-      <section
-        class="d-flex justify-content-center justify-content-lg-betweenborder-bottom"
-        style="background-color: rgba(0, 0, 0, 33%)"
-      >
-        <!-- Copyright -->
-        <div class="p-4 d-lg-block">
-          © 2021 Copyright:
-          <a class="text-reset fw-bold" href="https://mdbootstrap.com/"
-            >MDBootstrap.com</a
-          >
-        </div>
-        <div class="mt-3">
-          <!-- Facebook -->
-          <a
-            class="btn text-white btn-floating m-1"
-            style="background-color: #3b5998"
-            href="#!"
-            role="button"
-            ><i class="fab fa-facebook-f"></i
-          ></a>
+    <!-- Section: Social media -->
+    <section class="d-flex justify-content-center justify-content-lg-betweenborder-bottom"
+      style="background-color: rgba(0, 0, 0, 33%)">
+      <!-- Copyright -->
+      <div class="p-4 d-lg-block">
+        © 2021 Copyright:
+        <a class="text-reset fw-bold" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+      </div>
+      <div class="mt-3">
+        <!-- Facebook -->
+        <a class="btn text-white btn-floating m-1" style="background-color: #3b5998" href="#!" role="button"><i
+            class="fab fa-facebook-f"></i></a>
 
-          <!-- Instagram -->
-          <a
-            class="btn text-white btn-floating m-1"
-            style="background-color: #ac2bac"
-            href="#!"
-            role="button"
-            ><i class="fab fa-instagram"></i
-          ></a>
+        <!-- Instagram -->
+        <a class="btn text-white btn-floating m-1" style="background-color: #ac2bac" href="#!" role="button"><i
+            class="fab fa-instagram"></i></a>
 
-          <!-- Linkedin -->
-          <a
-            class="btn text-white btn-floating m-1"
-            style="background-color: #0082ca"
-            href="#!"
-            role="button"
-            ><i class="fab fa-linkedin-in"></i
-          ></a>
-          <!-- Github -->
-          <a
-            class="btn text-white btn-floating m-1"
-            style="background-color: #333333"
-            href="#!"
-            role="button"
-            ><i class="fab fa-github"></i
-          ></a>
-        </div>
+        <!-- Linkedin -->
+        <a class="btn text-white btn-floating m-1" style="background-color: #0082ca" href="#!" role="button"><i
+            class="fab fa-linkedin-in"></i></a>
+        <!-- Github -->
+        <a class="btn text-white btn-floating m-1" style="background-color: #333333" href="#!" role="button"><i
+            class="fab fa-github"></i></a>
+      </div>
 
-        <!-- Copyright -->
-      </section>
-    </footer>
-    <!-- Footer -->
+      <!-- Copyright -->
+    </section>
+  </footer>
+  <!-- Footer -->
 
-    <!--Llamamos el js de bootstrap-->
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
-      crossorigin="anonymous"
-    ></script>
-  </body>
+  <!--Llamamos el js de bootstrap-->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+    crossorigin="anonymous"></script>
+</body>
+
 </html>

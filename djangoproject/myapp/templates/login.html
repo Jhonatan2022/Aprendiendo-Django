@@ -6,16 +6,27 @@
 
 <title>Login</title>
 
-<!--llamamos la bariable que creamos como titulo-->
-<h1>Iniciar Sesión</h1>
+<main class="container">
+  <div class="row">
+    <div class="col-md-4 offset-md-4">
+      <form action="{% url 'login' %}" method="post" class="card card-body mb-4 mt-3">
+        <h1 class="text-center">Login</h1>
+        {% csrf_token %} {{ error }}
 
-<p>{{ error }}</p>
+        <div class="mb-3">
+          <label for="username">Username:</label>
+          <input type="text" name="username" id="username" class="form-control" placeholder="Write your user name" />
+        </div>
 
-<div class="row g-3 align-items-center" style="justify-content: center">
-  <form method="post" action="{% url 'login' %}">
-    <!--Creamos el token del formulario-->
-    {% csrf_token %} {{ form.as_p }}
-    <button>Login</button>
-  </form>
-</div>
+        <div class="mb-3">
+          <label for="Password">Password:</label>
+          <input type="password" name="password" id="password1" class="form-control"
+            placeholder="Write your password" />
+        </div>
+
+        <button class="btn btn-dark mb-3">Login</button>
+      </form>
+    </div>
+  </div>
+</main>
 {% endblock %}
