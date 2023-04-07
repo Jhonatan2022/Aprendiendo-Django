@@ -194,11 +194,13 @@ def create_task(request):
     if request.method == 'GET':
 
         # Obtenemos todos los proyectos que pertenezcan al usuario actual
-        project = Proyecto.objects.filter(user=request.user)  
+        # project = Proyecto.objects.filter(user=request.user)  
+
+        
 
         return render(request, 'tasks/create_task.html', {
             'form': Createtask(),
-            'projects': project
+            #'projects': project
         })
     # Creamos una condicional para que si el usuario envia un formulario, nos guarde los datos en la base de datos.
     else:
@@ -210,7 +212,7 @@ def create_task(request):
             # Creamos una condicional para validar si el formulario es válido
 
             # Obtenemos todos los proyectos que pertenezcan al usuario actual
-            project = Proyecto.objects.filter(user=request.user)
+            # project = Proyecto.objects.filter(user=request.user)
 
             # Creamos una variable que nos permita almacenar los datos que nos envia el usuario
             new_task = form.save(commit=False)
@@ -228,7 +230,7 @@ def create_task(request):
             # Renderizamos el formulario de registro en caso de que el usuario no envie un formulario
             return render(request, 'tasks/create_task.html', {
                 'form': Createtask(),
-                'projects': project,
+                # 'projects': project,
                 'error': 'No se ha podido crear la tarea :('
             })
 

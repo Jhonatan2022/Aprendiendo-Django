@@ -15,37 +15,15 @@
         <h1 class="text-center">Create task</h1>
         {% csrf_token %} {{ error }}
 
-        <div class="mb-3">
-          <label for="tittle">Tittle:</label>
-          <input type="text" name="tittle" id="tittle" class="form-control" placeholder="Write tittle of task" />
-        </div>
-
-        <div class="mb-3">
-          <label for="description">Description:</label>
-          <textarea type="text" name="description" id="description" class="form-control"
-            placeholder="Write description of task" /></textarea>
-        </div>
-
-        <div class="mb-3">
-          <label for="id_project">Project:</label>
-          <select name="project" required id="id_project" class="form-select">
-            <option value selected>Select a project</option>
-            {% for project in projects %}
-            <option value="{{ project.id }}">{{ project.name }}</option>
-            {% endfor %}
-          </select>
-        </div>
-
-        <div class="mb-3">
-          <label for="important">Important:</label>
-          <input type="checkbox" name="important" id="important" />
-        </div>
-        <button class="btn btn-dark mb-3">
+        {{ form }}
+         
+        <button class="btn btn-dark mb-3 mt-2">
           Create Task<img src="{% static 'logo3.webp' %}" alt="" width="20" />
         </button>
       </form>
     </div>
   </div>
 </main>
+
 
 {% endblock %}

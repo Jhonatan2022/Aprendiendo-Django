@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 # Import the pathlib and os modules
 from pathlib import Path
+import os
+
+# Importamos dj-database-url para poder usar la base de datos de Postgres
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 # Nos permite acceder a los archivos de la aplicación desde cualquier parte del sistema
@@ -25,15 +29,28 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 # Este apartado determinara la clave secreta que se usara para encriptar la información
 # Sirve para mejorar la encriptación de los usuarios y contraseñas
-SECRET_KEY = 'django-insecure-9a8e7lb+hvz1rbdy%xc5m8a@wj_%x50)@mdp1cbp71&e5u*-eb'
+# SECRET_KEY = 'django-insecure-9a8e7lb+hvz1rbdy%xc5m8a@wj_%x50)@mdp1cbp71&e5u*-eb'
+
+# Modified SECRET_KEY para que no se muestre en el repositorio de GitHub
+SECRET_KEY = os.environ.get('SECRET_KEY', default='your secret key')
+# Ahora podra leer la variable de entorno que nos brinda la nube
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # Este apartado determinara si la aplicación se ejecutara en modo desarrollo o producción
-DEBUG = True  # Modo desarrollo (True) / Modo producción (False)
+DEBUG = 'RENDER' not in os.environ # Render no se encuentra en el entorno de producción
+# True  # Modo desarrollo (True) / Modo producción (False)
 
 
 # Este apartado determinara que direcciónes tiene permitido acceder a la aplicación
 ALLOWED_HOSTS = []
+
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+
+# Creamos una condicional para validar si la variable existe o no y agregarla a la lista de ALLOWED_HOSTS
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+
+
 
 
 # Application definition
@@ -59,6 +76,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',   
 ]
 
 ROOT_URLCONF = 'mysite.urls'
@@ -89,10 +107,18 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # Este apartado determinara el motor de base de datos que se usara en el proyecto
 # Nos indica a que base de datos nos vamos a conectar o estamos conectados
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+
+    # Configuración para la base de datos de Postgres
+    'default': dj_database_url.config(
+        default='postgresql://postgres:postgres@localhost/postgres',
+        conn_max_age=600,
+    )
+
+
+    #'default': {
+     #   'ENGINE': 'django.db.backends.sqlite3',
+    #    'NAME': BASE_DIR / 'db.sqlite3',
+    #}
 }
 
 
@@ -135,6 +161,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 # Este apartado determinara la ruta de los archivos estáticos
 STATIC_URL = 'static/'
+
+if not DEBUG:    # Tell Django to copy statics to the `staticfiles` directory
+    # in your application directory on Render.
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    # Turn on WhiteNoise storage backend that takes care of compressing static files
+    # and creating unique names for each version so they can safely be cached forever.
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Creamos la ruta para que redirija al usuario a login
 LOGIN_URL = '/login'
