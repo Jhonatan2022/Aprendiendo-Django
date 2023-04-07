@@ -179,9 +179,8 @@ def completed_tasks(request):
         'tasks': tarea
     })
 
+
 # Creamos una vista para que el usuario pueda crear una nueva tarea
-
-
 def create_task(request):
 
     # Creamos una condicional para que si el usuario envia un formulario, nos guarde los datos en la base de datos.
@@ -256,6 +255,8 @@ def task_detail(request, task_id):
         except ValueError:
             # Renderizamos el formulario de registro en caso de que el usuario no envie un formulario
             return render(request, 'tasks/task_detail.html', {
+
+                # Mostramos un mensaje de error junto con el formulario
                 'task': tarea,
                 'form': form,
                 'error': 'No se ha podido editar la tarea :('
@@ -372,18 +373,45 @@ def delete_project(request, pro_id):
 # Creamos una vista unica para mostrar los datos de un projecto
 def project_detail(request, id):
 
-    # Creamos una consulta para mostrarlos en la vista de los tamplates
-    # Usamos el método all para obtener todos los datos de la tabla Proyecto
+    # Utilizamos el createproject para que nos muestre los datos del proyecto y los pueda editar
 
-    # Lanzamos un pagina de error 404 en caso de que no exista el proyecto
-    datosprojects = get_object_or_404(Proyecto, id=id)
+    if request.method == 'GET':
 
-    # Hacemos una consulta para obtener los datos de las tareas que coincidan con el id del proyecto
-    tasks = task.objects.filter(project_id=id)
+        # Creamos una variable que nos permita almacenar los datos que nos envia el usuario
+        projecto = get_object_or_404(Proyecto, pk=id, user=request.user)
 
-    # Renderizamos el template project_detail.html
-    return render(request, 'projects/detail.html', {
-        'project': datosprojects,
-        'tasks': tasks
+        form = Createproject(instance=projecto)
+        # Renderizamos el template project_detail.html
+        return render(request, 'projects/detail.html', {
 
-    })
+            # Creamos un formulario de actualización de datos
+            'project': projecto,
+            'form': form
+        })
+    else:
+
+        # Metemos el metodo en un try en caso de que se genere un error
+        try:
+            # Creamos una variable que nos permita almacenar los datos que nos envia el usuario
+            projecto = get_object_or_404(Proyecto, pk=id, user=request.user)
+
+            # Creamos una variable que nos permita almacenar los datos que nos envia el usuario
+            form = Createproject(request.POST, instance=projecto)
+
+            # Guardamos los datos en la base de datos
+            form.save()
+
+            # Redireccionamos a la ruta projects
+            return redirect('projects')
+
+        # En caso de que se genere un error, nos redirecciona a la ruta create_project
+        except ValueError:
+            # Renderizamos el formulario con un mensaje de error
+            return render(request, 'projects/detail.html', {
+
+                # Creamos un formulario de actualización de datos junto con el mensaje de error
+                'project': projecto,
+                'form': form,
+                'error': 'No se ha podido editar el proyecto :('
+            })
+        

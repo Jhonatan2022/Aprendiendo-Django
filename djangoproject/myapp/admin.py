@@ -19,7 +19,7 @@ class taskAdmin(admin.ModelAdmin):
     # Definimos la fecha de creación como campo de solo lectura
     readonly_fields = ('created',)
 
-    
+
 # Agregamos el modelo task a la interfaz de administración de Django
 admin.site.register(task, taskAdmin)
 

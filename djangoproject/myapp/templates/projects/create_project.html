@@ -9,7 +9,7 @@
 
 <title>Create projects</title>
 
-<h1 align="center" >Welcome Create a new project</h1>
+<h1 align="center">Welcome Create a new project</h1>
 
 <!--Insertamos la variable -->
 {% csrf_token %}
@@ -22,12 +22,11 @@
   <div class="row g-3 align-items-center" style="justify-content: center">
     <div class="col-auto">
       {{ form}}
-      <button type="submit" class="btn btn-success mt-3 mb-4">Create Project
-        <img src="{% static 'logo3.webp' %}" alt="" width="20" /></button>
+      <button type="submit" class="btn btn-success mt-3 mb-4">
+        Create Project <img src="{% static 'logo3.webp' %}" alt="" width="20" />
+      </button>
     </div>
   </div>
-
-  
 </form>
 
 {% endblock %}

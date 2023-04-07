@@ -9,15 +9,13 @@
 <!--llamamos la bariable que creamos como titulo-->
 <h1>Iniciar Sesión</h1>
 
-
 <p>{{ error }}</p>
 
-
-<div class="row g-3 align-items-center" style="justify-content: center;">
-<form method="post" action="{% url 'login' %}">
-  <!--Creamos el token del formulario-->
-  {% csrf_token %} {{ form.as_p }}
-  <button>Login</button>
-</form>
+<div class="row g-3 align-items-center" style="justify-content: center">
+  <form method="post" action="{% url 'login' %}">
+    <!--Creamos el token del formulario-->
+    {% csrf_token %} {{ form.as_p }}
+    <button>Login</button>
+  </form>
 </div>
 {% endblock %}

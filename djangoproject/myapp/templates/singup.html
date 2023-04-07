@@ -12,7 +12,11 @@
 
   <p>{{ error }}</p>
 
-  <form method="post" action="{% url 'singup' %}" style="justify-content: center">
+  <form
+    method="post"
+    action="{% url 'singup' %}"
+    style="justify-content: center"
+  >
     <!--Creamos el token del formulario-->
     {% csrf_token %} {{ form.as_p }}
     <button>singup</button>
