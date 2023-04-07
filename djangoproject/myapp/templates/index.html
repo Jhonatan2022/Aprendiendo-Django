@@ -8,7 +8,13 @@
 
 <div class="row g-3 align-items-center" style="justify-content: center">
   <!--llamamos la bariable que creamos como titulo-->
-  <h1>{{ titulo }} {{ nameuser }}</h1>
+  <h1 align="center">{{ titulo }}
+
+    <!--Creamos una condicional para cuando un usuario este logueado-->
+    {% if user.is_authenticated %}
+    <!--llamamos la variable que creamos para el nombre del usuario-->
+    {{ nameuser }}
+    {% endif %}</h1>
 </div>
 
 {% endblock %}

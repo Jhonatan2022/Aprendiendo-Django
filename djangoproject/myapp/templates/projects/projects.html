@@ -14,7 +14,7 @@
   <div class="card border-info mb-3 mx-4" style="width: 18rem; border: 3px solid;">
     <div class="card-body">
       <h5 class="card-title">{{ project.id }}: {{ project.name }}</h5>
-      <p class="card-text">With additional content.</p>
+      <p class="card-text"><b>BY: </b> {{ project.user.username }} </p>
       <a href="{% url 'projectdetail' project.id %}" class="btn btn-primary">Details</a>
     </div>
   </div>

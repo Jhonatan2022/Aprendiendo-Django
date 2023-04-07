@@ -14,6 +14,11 @@ class Proyecto(models.Model):
     # Especificamos la cantidad de caracteres que contendrá el campo
     name = models.CharField(max_length=50)
 
+    # Creamos un campo para asignar al usuario que creó el proyecto
+    # Usamos el comando ForeignKey para relacionar el proyecto con otra tabla
+    # Ponemos on_delete=models.CASCADE, Para que cuando se elimine un elemento, se eliminen también los que tienen una relación con el.
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
     # Definimos el método __str__ para que nos muestre el nombre del proyecto en el panel de administración
     def __str__(self):
         return self.name

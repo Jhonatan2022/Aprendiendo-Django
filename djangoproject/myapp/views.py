@@ -174,7 +174,7 @@ def completed_tasks(request):
         tarea = task.objects.filter(user=request.user, datecompleted__isnull=False).order_by('-datecompleted') # Usamos el método order_by para ordenar los datos de la tabla task
     
         # Imprimimos el id de la tarea que coincida con el id que le pasamos por parámetro
-        return render(request, 'tasks/completed_tasks.html', {
+        return render(request, 'tasks/tasks.html', {
             'tasks': tarea
         })
 
@@ -183,6 +183,7 @@ def create_task(request):
 
     # Creamos una condicional para que si el usuario envia un formulario, nos guarde los datos en la base de datos.
     if request.method == 'GET':
+
         return render(request, 'tasks/create_task.html', {
             'form': Createtask()
         })
@@ -301,8 +302,8 @@ def projects(request):
     # proyectos = list(Proyecto.objects.values()) # values() nos permite obtener los valores de los campos de la tabla Proyecto
 
     # Crearemos una consulta para mostrarlos en la vista de los tamplates
-    # Usamos el método all para obtener todos los datos de la tabla Proyecto
-    datosprojects = Proyecto.objects.all()
+    # Usamos el metodo filter para filtrar los datos que coincidan con el usuario actual
+    datosprojects = Proyecto.objects.filter(user=request.user)
 
     # Imprimimos los proyectos que tenemos en nuestra base de datos
     return render(request, 'projects/projects.html', {
@@ -321,11 +322,32 @@ def create_project(request):
 
     # En caso de que el usuario envie un formulario, nos guarde los datos en la base de datos
     else:
-        # Creamos un nuevo proyecto y le pasamos los datos que nos envia el usuario
-        Proyecto.objects.create(name=request.POST['name'])
 
-    # Redireccionamos a la ruta projects
-    return redirect('projects')
+        # Metemos el metodo en un try en caso de que se genere un error
+        try:
+            # Creamos una variable que nos permita almacenar los datos que nos envia el usuario
+            new_project = Createproject(request.POST)
+
+            # Creamos una variable que nos permita almacenar los datos que nos envia el usuario
+            new_project = new_project.save(commit=False)
+            
+            # Asignamos el proyecto al usuario actual
+            new_project.user = request.user
+
+            # Guardamos los datos en la base de datos
+            new_project.save()
+
+            # Redireccionamos a la ruta projects
+            return redirect('projects')
+        
+        # En caso de que se genere un error, nos redirecciona a la ruta create_project
+        except ValueError:
+
+            # Renderizamos el formulario con un mensaje de error
+            return render(request, 'projects/create_project.html', {
+                'form': Createproject(),
+                'error': 'No se ha podido crear el proyecto :('
+            })
 
 
 # Creamos una vista unica para mostrar los datos de un projecto
