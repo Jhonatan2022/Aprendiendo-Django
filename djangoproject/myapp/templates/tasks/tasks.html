@@ -1,6 +1,8 @@
 <!--Llamamos el navbar-->
 {% extends 'layouts/navbar.html' %}
 
+{% load static %}
+
 <!--Insertamos el contenido en la variable que creamos anteriormente-->
 {% block content %}
 
@@ -15,7 +17,7 @@
       max-width: 20rem;
       border-radius: 25px;
       border: 4px solid var(--moradoclaro);
-    ">
+    "><img src="{{ task.image.url }}" class="card-img-top"alt="{{ task.name }}">
     <div class="card-header">
       <b>By:</b> {{ task.user.username }}
       <div style="text-align: right; margin-top: -1.6em">

@@ -18,10 +18,13 @@ class Createtask(forms.ModelForm):
         model = task
 
         # Definimos los campos que tendrá el formulario
-        fields = ['tittle', 'description', 'project', 'important']
+        fields = ['image','tittle', 'description', 'project', 'important']
 
         # Agregaremos estilos al formulario
         widgets = {
+            
+            'image': forms.FileInput(attrs={
+                'class': 'form-control mb-3'}),
 
             # Agregaremos estilos al formulario
             'tittle': forms.TextInput(attrs={

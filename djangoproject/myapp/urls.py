@@ -6,6 +6,12 @@ from django.urls import path
 # Importamos las vistas de nuestra aplicación
 from . import views  # El punto indica que estamos en la misma carpeta
 
+# Importamos las dependencias para la carga de imagenes
+from django.conf import settings
+
+# Agregamos la ruta de las imagenes para que se puedan cargar en el navegador
+from django.contrib.staticfiles.urls import static
+
 
 # Exportaremos las rutas de nuestra aplicación para que las podamos importar en el archivo urls.py de nuestro proyecto
 # Exportamos una lista nueva
@@ -84,4 +90,5 @@ urlpatterns = [
     # Asignamos nombre a la ruta
     path('tasks/completed/', views.completed_tasks, name="completed_tasks"),
 
-]
+# Agregamos la carga de archivos estaticos
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

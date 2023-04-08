@@ -14,8 +14,11 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from pathlib import Path
 import os
 
+# Importamos pillow para la carga de imagenes
+
+
 # Importamos dj-database-url para poder usar la base de datos de Postgres
-import dj_database_url
+# import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 # Nos permite acceder a los archivos de la aplicación desde cualquier parte del sistema
@@ -32,23 +35,25 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECRET_KEY = 'django-insecure-9a8e7lb+hvz1rbdy%xc5m8a@wj_%x50)@mdp1cbp71&e5u*-eb'
 
 # Modified SECRET_KEY para que no se muestre en el repositorio de GitHub
-SECRET_KEY = os.environ.get('SECRET_KEY', default='your secret key')
+SECRET_KEY = 'django-insecure-9a8e7lb+hvz1rbdy%xc5m8a@wj_%x50)@mdp1cbp71&e5u*-eb'
+# os.environ.get('SECRET_KEY', default='your secret key')
 # Ahora podra leer la variable de entorno que nos brinda la nube
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # Este apartado determinara si la aplicación se ejecutara en modo desarrollo o producción
-DEBUG = 'RENDER' not in os.environ # Render no se encuentra en el entorno de producción
+DEBUG = True
+#'RENDER' not in os.environ # Render no se encuentra en el entorno de producción
 # True  # Modo desarrollo (True) / Modo producción (False)
 
 
 # Este apartado determinara que direcciónes tiene permitido acceder a la aplicación
 ALLOWED_HOSTS = []
 
-RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+#RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
 
 # Creamos una condicional para validar si la variable existe o no y agregarla a la lista de ALLOWED_HOSTS
-if RENDER_EXTERNAL_HOSTNAME:
-    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+#if RENDER_EXTERNAL_HOSTNAME:
+ #   ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
 
 
@@ -76,7 +81,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',   
+    #'whitenoise.middleware.WhiteNoiseMiddleware',   
 ]
 
 ROOT_URLCONF = 'mysite.urls'
@@ -108,16 +113,26 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # Nos indica a que base de datos nos vamos a conectar o estamos conectados
 DATABASES = {
 
-    # Configuración para la base de datos de Postgres
-    'default': dj_database_url.config(
-        default='postgresql://postgres:postgres@localhost/postgres',
-        conn_max_age=600,
-    )
+    # Instalamos el paquete de mysqlclient para poder usar la base de datos de mysql
+    # Cambiamoa a la base de datos mysql
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'django',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '3306',
+    }
 
+    # Configuración para la base de datos de Postgres
+    #'default': dj_database_url.config(
+     #   default='postgresql://postgres:postgres@localhost/postgres',
+      #  conn_max_age=600,
+    #)
 
     #'default': {
-     #   'ENGINE': 'django.db.backends.sqlite3',
-    #    'NAME': BASE_DIR / 'db.sqlite3',
+     #  'ENGINE': 'django.db.backends.sqlite3',
+      #  'NAME': BASE_DIR / 'db.sqlite3',
     #}
 }
 
@@ -162,15 +177,23 @@ USE_TZ = True
 # Este apartado determinara la ruta de los archivos estáticos
 STATIC_URL = 'static/'
 
-if not DEBUG:    # Tell Django to copy statics to the `staticfiles` directory
+# if not DEBUG:    # Tell Django to copy statics to the `staticfiles` directory
     # in your application directory on Render.
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    # STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
     # Turn on WhiteNoise storage backend that takes care of compressing static files
     # and creating unique names for each version so they can safely be cached forever.
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+    # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Creamos la ruta para que redirija al usuario a login
 LOGIN_URL = '/login'
+
+
+# Creamos la ruta de las imagenes que se subiran al servidor
+MEDIA_ROOT = os.path.join(BASE_DIR, '')
+
+# Indicamos la ruta de las imagenes
+MEDIA_URL = '/images/'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
