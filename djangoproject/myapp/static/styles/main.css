@@ -2,7 +2,6 @@
 :root {
   --fondo-container: #83838398;
   --naranja: #ff5733;
-  --naranjaclaro: #fa826791;
   --morado: #581845;
   --moradoclaro: #b04f93;
   --violeta: #c70039;
@@ -22,42 +21,20 @@
   margin-bottom: 8em;
 }
 
-@media screen and (max-width: 350px) {
-  .containe {
-    width: 80%;
-  }
-}
-
-/* ------------------------------------------------------------------------------
+/*-------------------------------------------------------------------------
 Estilos del navbar
-------------------------------------------------------------------------------*/
+---------------------------------------------------------------------------*/
   .bg-dark {
   background-color: var(--morado);
   border-bottom-left-radius: 15px;
 }
 
-/* ------------------------------------------------------------------------------
-Estilos del contenedor y de las cartas
------------------------------------------------------------------------------- */
-
-.card {
-  background-color: var(--violeta);
-  display: flex;
-}
-
-.card:hover {
-  transform: scale(0.95);
-  transition: all 0.5s ease;
-}
-
 footer {
   font-size: 15px;
 }
-
 /* ----------------------------------------------
 Animación a la bienvenida
 ---------------------------------------------- */
-
 .welcome {
   text-shadow: 0 0 7px rgb(96, 154, 255), 0 0 3px rgb(115, 185, 255);
 }

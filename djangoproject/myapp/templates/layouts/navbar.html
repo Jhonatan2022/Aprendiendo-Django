@@ -119,10 +119,6 @@
             </li>
             {% endif %}
           </ul>
-          <form class="d-flex mt-3" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-            <button class="btn btn-success" type="submit">Search</button>
-          </form>
         </div>
       </div>
     </div>
@@ -148,8 +144,6 @@
           background-color: rgba(0, 0, 0, 0.27);
           border-top-right-radius: 15px;
           border-top-left-radius: 15px;
-          margin: auto;
-          width: 99.4%;
         "></section>
     <!-- Section: Social media -->
 
@@ -168,21 +162,17 @@
             <p></p>
           </div>
           <!-- Grid column -->
-
+          
           <!-- Grid column -->
           <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
             <!-- Links -->
             <h6 class="text-uppercase fw-bold mb-4">Useful links</h6>
             <p>
-              <a href="#!" class="text-reset">
-                <i class="fa-solid fa-arrow-up-right-from-square me-2"></i>Pricing</a>
+              <a href="{% url 'createproject' %}" class="text-reset">
+                <i class="fa-solid fa-arrow-up-right-from-square me-2"></i>Create Project</a>
             </p>
             <p>
-              <a href="#!" class="text-reset"><i class="fa-solid fa-arrow-up-right-from-square me-2"></i>Settings</a>
-            </p>
-            <p>
-              <a href="#!" class="text-reset"><i class="fa-solid fa-arrow-up-right-from-square me-2"></i>Orders</a>
-            </p>
+              <a href="{% url 'createtask' %}" class="text-reset"><i class="fa-solid fa-arrow-up-right-from-square me-2"></i>Create Task</a>
           </div>
           <!-- Grid column -->
 
@@ -192,10 +182,9 @@
             <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
             <p>
               <i class="fas fa-envelope me-3"></i>
-              info@example.com
+              Florezj328@gmail.com
             </p>
-            <p><i class="fas fa-phone me-3"></i> + 01 234 567 88</p>
-            <p><i class="fas fa-print me-3"></i> + 01 234 567 89</p>
+            <p><i class="fas fa-phone me-3"></i> +57 320 458 1545 </p>
           </div>
           <!-- Grid column -->
         </div>
@@ -210,22 +199,15 @@
       <!-- Copyright -->
       <div class="p-4 d-lg-block">
         © 2021 Copyright:
-        <a class="text-reset fw-bold" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+        <a class="text-reset fw-bold" href="https://github.com/Jhonatan2022">Jhonatan2022</a>
       </div>
       <div class="mt-3">
-        <!-- Facebook -->
-        <a class="btn text-white btn-floating m-1" style="background-color: #3b5998" href="#!" role="button"><i
-            class="fab fa-facebook-f"></i></a>
-
         <!-- Instagram -->
-        <a class="btn text-white btn-floating m-1" style="background-color: #ac2bac" href="#!" role="button"><i
+        <a class="btn text-white btn-floating m-1" style="background-color: #ac2bac" href="https://www.instagram.com/florez__jhonatan/" role="button"><i
             class="fab fa-instagram"></i></a>
 
-        <!-- Linkedin -->
-        <a class="btn text-white btn-floating m-1" style="background-color: #0082ca" href="#!" role="button"><i
-            class="fab fa-linkedin-in"></i></a>
         <!-- Github -->
-        <a class="btn text-white btn-floating m-1" style="background-color: #333333" href="#!" role="button"><i
+        <a class="btn text-white btn-floating m-1" style="background-color: #333333" href="https://github.com/Jhonatan2022" role="button"><i
             class="fab fa-github"></i></a>
       </div>
 

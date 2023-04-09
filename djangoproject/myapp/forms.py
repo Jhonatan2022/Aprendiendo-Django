@@ -9,7 +9,6 @@ from .models import task, Proyecto
 # Importamos el modulo que contiene la clase User
 from django.contrib.auth.models import User
 
-
 # Creamos una clase que hereda de forms.Form
 class Createtask(forms.ModelForm):
     class Meta:
@@ -18,18 +17,19 @@ class Createtask(forms.ModelForm):
         model = task
 
         # Definimos los campos que tendrá el formulario
-        fields = ['image','tittle', 'description', 'project', 'important']
+        fields = ['tittle','description', 'project', 'important']
 
         # Agregaremos estilos al formulario
         widgets = {
-            
-            'image': forms.FileInput(attrs={
-                'class': 'form-control mb-3'}),
 
             # Agregaremos estilos al formulario
             'tittle': forms.TextInput(attrs={
                 'class': 'form-control mb-3',
                 'placeholder': 'Write tittle of task'}),
+
+            'image': forms.FileInput(attrs={
+                'class': 'form-control mb-3'
+                }),
 
             'description': forms.Textarea(attrs={
                 'class': 'form-control mb-3',

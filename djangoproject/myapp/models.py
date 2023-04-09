@@ -6,6 +6,9 @@ from django.db import models
 # Importamos el modelo User para poder relacionar las tareas con los usuarios
 from django.contrib.auth.models import User
 
+# Agregamos la ruta de las imagenes para que se puedan cargar en el navegador
+from django.contrib.staticfiles.urls import static
+
 # Create your models here.
 class Proyecto(models.Model):
 

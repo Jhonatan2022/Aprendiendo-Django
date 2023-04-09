@@ -194,9 +194,7 @@ def create_task(request):
     if request.method == 'GET':
 
         # Obtenemos todos los proyectos que pertenezcan al usuario actual
-        # project = Proyecto.objects.filter(user=request.user)  
-
-        
+        # project = Proyecto.objects.filter(user=request.user) 
 
         return render(request, 'tasks/create_task.html', {
             'form': Createtask(),
@@ -208,18 +206,20 @@ def create_task(request):
         # Metemos los parametro en un try en caso de que se generé un error
         try:
             # Creamos una variable que nos permita almacenar los datos que nos envia el usuario
-            form = Createtask(request.POST)
+            form = Createtask(request.POST, request.FILES)
             # Creamos una condicional para validar si el formulario es válido
+
 
             # Obtenemos todos los proyectos que pertenezcan al usuario actual
             # project = Proyecto.objects.filter(user=request.user)
-
+            print(request.POST)
             # Creamos una variable que nos permita almacenar los datos que nos envia el usuario
             new_task = form.save(commit=False)
+            
             # Asignamos la tarea a un usuario
             new_task.user = request.user
 
-            # Guardamos los datos en la base de datos
+            # Guardamos los datos en la base de datos y la imagen en la carpeta media
             new_task.save()
 
             # Redireccionamos a la ruta tasks
