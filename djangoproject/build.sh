@@ -1,7 +1,7 @@
 #  poetry install
 
 # Comando para instalar as dependências do projeto
-pip install -r requirements.txt
+pip install -r requirements.sh
 
 # pip install -r requirements.txt
 
