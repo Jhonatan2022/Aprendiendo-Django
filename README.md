@@ -13,11 +13,6 @@
   💼 Tools: <strong>Visual Studio Code, Framework - Django, documentatión and videos.</strong>
 </p>
 
-<p align="left">
-  💌 To contact me:
-</p>
+## Contact Me: <a href="mailto:florezj328@gmail.com"> <img src="https://img.shields.io/badge/Gmail-red?style=for-the-badge&logo=gmail&logoColor=white" width="80px" alt="Jhonattan Florez"/> </a>
 
-<p align="left">
-  <a href="#" alt="Gmail">
-  <img src="https://img.shields.io/badge/-Gmail-FF0000?style=flat-square&labelColor=FF0000&logo=gmail&logoColor=white&link="https://mail.google.com/mail/u/0/#inbox/"></a>
-</p>  
+
