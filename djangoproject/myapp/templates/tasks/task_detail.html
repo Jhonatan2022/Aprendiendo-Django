@@ -1,7 +1,5 @@
 <!--Llamamos el navbar-->
-{% extends 'layouts/navbar.html' %}
-
-{% load static %}
+{% extends 'layouts/navbar.html' %} {% load static %}
 
 <!--Insertamos el contenido en la variable que creamos anteriormente-->
 {% block content %}
@@ -11,11 +9,13 @@
 <main class="container">
   <div class="row">
     <div class="col-md-4 offset-md-4">
-      <form action="{% url 'taskdetail' task.id %}" method="post" class="card card-body mb-4 mt-3">
+      <form
+        action="{% url 'taskdetail' task.id %}"
+        method="post"
+        class="card card-body mb-4 mt-3"
+      >
         <h1 class="text-center">Create task</h1>
-        {% csrf_token %} {{ error }}
-
-        {{ form }}
+        {% csrf_token %} {{ error }} {{ form }}
 
         <button class="btn btn-dark mb-3">
           Update Task<img src="{% static 'logo3.webp' %}" alt="" width="20" />

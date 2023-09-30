@@ -11,17 +11,29 @@
 <div class="row row-cols-1 row-cols-md-2 g-3" style="justify-content: center">
   <!--Creamos un ciclo for para mostrar los datos en un render de html-->
   {% for project in projects %}
-  <div class="card border-info mb-3 mx-4" style="width: 18rem; border: 3px solid">
+  <div
+    class="card border-info mb-3 mx-4"
+    style="width: 18rem; border: 3px solid"
+  >
     <div class="card-body">
       <h5 class="card-title">{{ project.id }}: {{ project.name }}</h5>
       <p class="card-text"><b>BY: </b> {{ project.user.username }}</p>
-      <a href="{% url 'projectdetail' project.id %}" class="btn btn-primary">Details</a>
-      <form class="btn" action="{% url 'delete_project' project.id %}" method="post">
+      <a href="{% url 'projectdetail' project.id %}" class="btn btn-primary"
+        >Details</a
+      >
+      <form
+        class="btn"
+        action="{% url 'delete_project' project.id %}"
+        method="post"
+      >
         {% csrf_token %}
-        <button class="btn btn-danger" style="
+        <button
+          class="btn btn-danger"
+          style="
             background-color: var(--violeta);
             border: 2px solid var(--violeta);
-          ">
+          "
+        >
           Delete✘
         </button>
       </form>
